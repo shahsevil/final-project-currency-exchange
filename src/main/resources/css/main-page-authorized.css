@@ -1,0 +1,397 @@
+body {
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+}
+
+/* BUTTON */
+
+.reset-section-container-form-login {
+    padding: 13px 85px;
+    color: white;
+    background-color: #E2474B;;
+    font-size: 25px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 0 70px;
+}
+
+/* HEADER */
+
+.container {
+    padding-left: 200px;
+    background-image: url("../img/white-background.jpg");
+    background-size: cover;
+}
+
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 100px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #1b3e85;
+    align-items: center;
+}
+
+.main-header-logo {
+    width: 200px;
+}
+
+.main-header-search-wrapper {
+    padding: 0 20px;
+    height: 50px;
+    display: flex;
+    background-color: white;
+    border-radius: 8px;
+    margin-right: 100px;
+}
+
+.main-header-search {
+    border: none;
+    margin-right: 100px;
+    outline: none;
+    font-size: 18px;
+}
+
+.main-header-profile-welcome {
+    display: block;
+}
+
+.main-header-profile-credentials {
+    color: white;
+    display: inline-block;
+    text-align: right;
+    margin-right: 20px;
+    border-bottom: 1px solid white;
+    padding-bottom: 2px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.main-header-user-icon {
+    height: 70px;
+}
+
+.main-header-profile-wrapper {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    position: relative;
+    cursor: pointer;
+}
+
+.main-header-profile-wrapper:active {
+    text-decoration: none;
+}
+
+.main-header-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.hidden-accordion-wrapper {
+    right: 0;
+    z-index: 2;
+    opacity: 0;
+    position: absolute;
+    top: -300px;
+    transition: opacity 1s ease;
+}
+
+.hidden-accordion {
+    border-radius: 0 0 8px 8px;
+    background-color: white;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+}
+
+.hidden-accordion-item {
+    padding: 12px 0 12px 20px;
+    width: 160px;
+    display: flex;
+    align-items: center;
+}
+
+.main-header-profile-wrapper:hover .hidden-accordion-wrapper {
+    top: 54px;
+    padding-top: 10px;
+    opacity: 1;
+}
+
+.hidden-accordion-item-link {
+    margin-left: 18px;
+    font-size: 16px;
+    color: #828282;
+    text-decoration: none;
+}
+
+.hidden-accordion-item:hover {
+    background-color: #edf2f5;
+}
+
+/* EXCHANGE  */
+
+.exchange {
+    height: calc(91.5vh - 70px);
+    background: url("../img/exchange-bg.png") no-repeat center top / cover;
+    padding-top: 150px;
+}
+
+.exchange-content {
+    width: 80%;
+    box-sizing: border-box;
+    margin: 0 auto;
+    background-color: #ffffff;
+    text-align: center;
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    padding: 30px 100px 62px;
+}
+
+.exchange-content-heading {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 25px;
+}
+
+.exchange-form {
+    width: 100%;
+    text-align: center;
+}
+
+.form-columns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.exchange-form-column {
+    width: 420px;
+    text-align: center;
+    padding-right: 20px;
+    margin-bottom: 80px;
+}
+
+.exchange-form-column:last-child {
+    padding-left: 20px;
+    padding-right: 0;
+}
+
+.select-name {
+    display: inline-block;
+    font-size: 18px;
+    color: #828282;
+    margin-bottom: 10px;
+}
+
+.exchange-result {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+
+.exchange-result-currency {
+    display: inline-block;
+    font-size: 120px;
+    font-weight: 700;
+    margin-left: 10px;
+    margin-right: 15px;
+}
+
+.currency-input {
+    display: inline-block;
+    color: #bdbdbd;
+    font-size: 100px;
+    border: none;
+    background-color: transparent;
+    width: 320px;
+    outline-color: #bdbdbd;
+}
+
+.form-footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.rate {
+    border: 1px solid #bdbdbd;
+    border-radius: 10px;
+    font-size: 27px;
+    padding: 15px 20px;
+    color: #828282;
+}
+
+.datepicker-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+}
+
+.datepicker-wrapper:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 60px;
+    right: 32%;
+    transform: translateY(-50%);
+    border-style: solid;
+    border-width: 13px 8px 0 8px;
+    border-color: #000 transparent transparent transparent;
+}
+
+.datepicker-input {
+    width: 100%;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid black;
+    font-size: 40px;
+    text-align: center;
+    z-index: 2;
+    background-color: transparent;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.datepicker-center {
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.datepicker-value {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 40px;
+    top: 22px;
+    z-index: 1;
+}
+
+.datepicker-value-date {
+    display: inline-block;
+    margin-right: 7px;
+    font-weight: 500;
+    font-size: 48px;
+}
+
+.datepicker-value-month {
+    font-size: 18px;
+    color: #828282;
+}
+
+.ui-datepicker {
+    padding: 0 0 0 0 !important;
+    border-bottom-right-radius: 15px !important;
+    border-bottom-left-radius: 15px !important;
+    border-top-right-radius: 15px !important;
+    border-top-left-radius: 15px !important;
+    overflow: hidden;
+    transform: translateX(79px);
+}
+
+.ui-datepicker .ui-widget-header {
+    background: #e2474b;
+    color: #ffffff;
+    padding: 10px 0;
+}
+
+.ui-datepicker .ui-datepicker-prev,
+.ui-datepicker .ui-datepicker-next {
+    top: 10px;
+}
+
+.ui-state-highlight,
+.ui-widget-content .ui-state-highlight,
+.ui-widget-header .ui-state-highlight {
+    background-color: #e2474b;
+    color: #ffffff;
+}
+
+.ui-datepicker td span,
+.ui-datepicker td a {
+    border-color: #e5d4b3;
+    height: 22px;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+.ui-widget-header .ui-icon {
+    filter: brightness(0) invert(1);
+}
+
+.ui-datepicker-prev-hover,
+.ui-datepicker-next-hover {
+    background: transparent !important;
+    border: none !important;
+}
+
+.datepicker-left {
+    left: 25% !important;
+}
+
+.datepicker-right {
+    left: 60% !important;
+}
+
+.exchange-content-heading-absolute {
+    position: absolute;
+    top: 538px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.main-header {
+    background-color: #0172D0;
+}
+
+.log-out-block {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 7px 21px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: .5s;
+}
+
+.log-out-btn {
+    text-decoration: none;
+    color: #828282;
+    margin-left: 8px;
+}
+
+.log-out-block:hover {
+    box-shadow: 7px 7px 10px rgb(37, 36, 36);
+}
+
+.main-header-profile-credentials {
+    border-bottom: 0;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.main-header-username {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.dd-option-image, .dd-selected-image {
+    margin-top: 10px;
+}

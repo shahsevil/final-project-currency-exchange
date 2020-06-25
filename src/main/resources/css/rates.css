@@ -1,0 +1,229 @@
+body {
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+}
+
+/* BUTTON */
+
+.reset-section-container-form-login {
+    padding: 15px 92px;
+    color: white;
+    background-color: #E2474B;
+    font-size: 25px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 70px;
+    display: inline-block;
+}
+
+.container {
+    padding-left: 200px;
+    background-image: url("../img/white-background.jpg");
+    background-size: cover;
+}
+
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 100px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #1b3e85;
+    align-items: center;
+}
+
+.main-header-logo {
+    width: 200px;
+}
+
+.main-header-search-wrapper {
+    padding: 0 20px;
+    height: 50px;
+    display: flex;
+    background-color: white;
+    border-radius: 8px;
+    margin-right: 100px;
+}
+
+.main-header-search {
+    border: none;
+    margin-right: 100px;
+    outline: none;
+    font-size: 18px;
+}
+
+.main-header-profile-welcome {
+    display: block;
+}
+
+.main-header-profile-credentials {
+    color: white;
+    display: inline-block;
+    text-align: right;
+    margin-right: 20px;
+    border-bottom: 1px solid white;
+    padding-bottom: 2px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.main-header-user-icon {
+    height: 70px;
+}
+
+.main-header-profile-wrapper {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    position: relative;
+    cursor: pointer;
+}
+
+.main-header-profile-wrapper:active {
+    text-decoration: none;
+}
+
+.main-header-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.hidden-accordion-wrapper {
+    right: 0;
+    z-index: 2;
+    opacity: 0;
+    position: absolute;
+    top: -300px;
+    transition: opacity 1s ease;
+}
+
+.hidden-accordion {
+    border-radius: 0 0 8px 8px;
+    background-color: white;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+}
+
+.hidden-accordion-item {
+    padding: 12px 0 12px 20px;
+    width: 160px;
+    display: flex;
+    align-items: center;
+}
+
+.main-header-profile-wrapper:hover .hidden-accordion-wrapper {
+    top: 54px;
+    padding-top: 10px;
+    opacity: 1;
+}
+
+.hidden-accordion-item-link {
+    margin-left: 18px;
+    font-size: 16px;
+    color: #828282;
+    text-decoration: none;
+}
+
+.hidden-accordion-item:hover {
+    background-color: #edf2f5;
+}
+
+.rates {
+    min-height: 100vh;
+    background: url("../img/exchange-bg.png") no-repeat center top / cover;
+    padding-top: 150px;
+    padding-bottom: 70px;
+}
+
+.exchange-content {
+    width: 80%;
+    box-sizing: border-box;
+    margin: 0 auto;
+    background-color: #ffffff;
+    text-align: center;
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    padding: 30px 120px 62px;
+}
+
+.exchange-content-heading {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 25px;
+}
+
+.exchange-content-subheading {
+    font-size: 24px;
+    color: #828282;
+}
+
+.rate {
+    border: 1px solid #bdbdbd;
+    border-radius: 10px;
+    font-size: 27px;
+    padding: 15px 20px;
+    color: #828282;
+}
+
+.rates-list {
+    padding: 0 10%;
+    margin: 0;
+    list-style: none;
+}
+
+.rates-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.rate-date {
+    font-size: 24px;
+}
+.button-rates {
+    text-decoration: none;
+}
+
+.main-header {
+    background-color: #0172D0;
+}
+
+.log-out-block {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 7px 21px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: .5s;
+}
+
+.log-out-btn {
+    text-decoration: none;
+    color: #828282;
+    margin-left: 8px;
+}
+
+.log-out-block:hover {
+    box-shadow: 7px 7px 10px rgb(37, 36, 36);
+}
+
+.main-header-profile-credentials {
+    border-bottom: 0;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.main-header-username {
+    display: block;
+    margin-bottom: 5px;
+}

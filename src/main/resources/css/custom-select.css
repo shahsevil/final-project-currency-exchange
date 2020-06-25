@@ -1,0 +1,34 @@
+.dd-container {
+    margin-bottom: 20px !important;
+}
+
+.dd-selected {
+    padding: 10px 30px !important;
+}
+.dd-select {
+    border: none !important;
+    border-bottom: 1px solid #000 !important;
+    border-radius: 0 !important;
+}
+
+.dd-selected-text {
+    font-size: 28px;
+}
+
+.date-select .dd-selected {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.date-select .dd-pointer {
+    right: 37%;
+}
+
+.date-select small {
+    font-size: 18px;
+}
+.date-select .dd-selected-text {
+    display: inline-block;
+    margin-right: 7px;
+}
