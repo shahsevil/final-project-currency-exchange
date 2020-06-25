@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="css/main-page-authorized.css">
+    <link rel="stylesheet" href="./css/custom-select.css">
+    <title>Exchange</title>
+</head>
+
+<body>
+<header class="main-header">
+    <a href="./main-page.html" class="main-header-logo"><img src="./img/iba-tech-logo-white.svg"
+                                                             alt="IBA Tech Academy"></a>
+    <div class="main-header-wrapper">
+        <div class="main-header-profile-wrapper">
+            <div class="main-header-profile-credentials">
+                <span class="main-header-username">Anatolii Safronov</span>
+                <div class="log-out-block">
+                    <img src="./img/log-out-icon.svg" alt="Log out">
+                    <a href="./index.html" class="log-out-btn">Log out</a>
+                </div>
+            </div>
+            <img class="main-header-user-icon" src="./img/user-icon-with-background.svg" alt="User Icon">
+        </div>
+    </div>
+</header>
+
+<section class="exchange">
+    <div class="exchange-content">
+        <h3 class="exchange-content-heading">
+            Exchange money
+        </h3>
+        <h3 class="exchange-content-heading exchange-content-heading-absolute">
+            Exchange rate date
+        </h3>
+        <form action="#" class="exchange-form">
+
+            <div class="form-columns">
+
+                <div class="exchange-form-column">
+                        <span class="select-name">
+                            From
+                        </span>
+                    <div id="exchange-from"></div>
+                    <div id="exchange-from-result" class="exchange-result">
+                        <span class="exchange-result-currency">$</span>
+                        <input type="text" class="currency-input" value="222" placeholder="0">
+                    </div>
+                    <div class="datepicker-wrapper datepicker-wrapper-left">
+                            <span class="select-name">
+                                From
+                            </span>
+                        <input readonly type="text" id="date-from" class="datepicker-input">
+                        <div class="datepicker-value" id="date-from-value"></div>
+                    </div>
+
+                </div>
+
+                <div class="exchange-form-column">
+                        <span class="select-name">
+                            To
+                        </span>
+                    <div id="exchange-to"></div>
+                    <div id="exchange-to-result" class="exchange-result">
+                        <span class="exchange-result-currency">€</span>
+                        <input type="text" class="currency-input" value="222" placeholder="0">
+                    </div>
+
+                    <div class="datepicker-wrapper">
+                            <span class="select-name">
+                                To
+                            </span>
+                        <input readonly type="text" id="date-to" class="datepicker-input">
+                        <div class="datepicker-value" id="date-to-value"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-footer">
+                <div class="rate">1USD/0.89EUR</div>
+                <a href="./rates.html" type="submit" class="reset-section-container-form-login">Exchange</a>
+                <div class="rate">1EUR/1.12USD</div>
+            </div>
+        </form>
+    </div>
+
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/prashantchaudhary/ddslick/master/jquery.ddslick.min.js"></script>
+<script src="./js/currency-select.js"></script>
+<script src="./js/date-select.js"></script>
+</body>
+
+
+</html>
