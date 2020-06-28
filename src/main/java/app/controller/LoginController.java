@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @Controller
 @Log4j2
-@RequestMapping("/")
+@RequestMapping("/login")
 public class LoginController {
 
     private final UserService userService;
@@ -27,7 +27,7 @@ public class LoginController {
     /**
      * http://localhost:8080/login
      */
-    @GetMapping()
+    @GetMapping
     public String handle_login_get() {
         log.info("GET -> /login");
         return "login";
@@ -48,7 +48,7 @@ public class LoginController {
 
         HttpSession session = httpServletRequest.getSession();
         log.info("Session -> ", session);
-        log.info("Redirecting -> /landing");
-        return "redirect:/landing";
+        log.info("POST -> /landing");
+        return "landing";
     }
 }
