@@ -16,6 +16,6 @@ public class UserService {
     }
 
     public Optional<User> findByUserNameAndPassword(String userName, String password) {
-        return userRepo.findUserByUserNameAnndPassword(userName, password);
+        return userRepo.findUserByUserNameAndPassword(userName, password);
     }
 }
