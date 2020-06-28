@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  main:
+    banner-mode: console
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ibatech
+    username: postgres
+    password: secret
+#    initialization-mode: always
+
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    show-sql: true
