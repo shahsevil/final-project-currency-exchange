@@ -18,4 +18,12 @@ public class UserService {
     public Optional<User> findByUserNameAndPassword(String userName, String password) {
         return userRepo.findUserByUserNameAndPassword(userName, password);
     }
+
+    public void registerUser(User user){
+        userRepo.save(user);
+    }
+
+    public Optional<User> findUserByUserName(String userName){
+        return userRepo.findUserByUserName(userName);
+    }
 }
