@@ -19,11 +19,13 @@ public class UserService {
         return userRepo.findUserByUserNameAndPassword(userName, password);
     }
 
-    public void registerUser(User user){
+    public Optional<User> findUserByEmail(String email) {
+        return userRepo.findUserByEmail(email);
+    }
+
+    public void registerUser(String full_name, String email, String password){
+        User user = new User(full_name, email, password);
         userRepo.save(user);
     }
 
-    public Optional<User> findUserByUserName(String userName){
-        return userRepo.findUserByUserName(userName);
-    }
 }

@@ -1,6 +1,9 @@
 package app.controller;
 
 import app.entity.User;
+import app.exception.EmailNotUniqueException;
+import app.exception.PasswordDoesntMatchException;
+import app.form.FormReg;
 import app.service.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -28,19 +31,21 @@ public class RegisterController {
     }
 
     @PostMapping
-    public String handle_register_post(@ModelAttribute("user") User user) {
+    public String handle_register_post(FormReg formReg) {
 
         /**
          * username should be passed as a parameter to findUserByUserName() method
          */
-//        Optional<User> userByUserName = userService.findUserByUserName();
-//
-//        if (userByUserName.isPresent()) {
-//            log.warn("This username already exists");
-//            return "redirect:/register";
-//        }
+        Optional<User> userByEmail = userService.findUserByEmail(formReg.getEmail());
 
-        userService.registerUser(user);
-        return "redirect:/login";
+        if (userByEmail.isPresent()) {
+            throw new EmailNotUniqueException();
+        } else if(!formReg.getPassword().equals(formReg.getConfirm())) {
+            throw new PasswordDoesntMatchException();
+        } else {
+            userService.registerUser(formReg.getFull_name(), formReg.getEmail(), formReg.getPassword());
+            return "redirect:/login";
+        }
+
     }
 }
