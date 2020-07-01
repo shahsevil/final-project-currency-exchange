@@ -39,7 +39,7 @@ public class LoginController {
             @RequestParam(value = "password") String password,
             HttpServletRequest httpServletRequest) {
 
-        Optional<User> byUserNameAndPassword = userService.findByUserNameAndPassword(username, password);
+        Optional<User> byUserNameAndPassword = userService.findUserByEmailAndPassword(username, password);
 
         if (!byUserNameAndPassword.isPresent()) {
             log.warn("POST -> login error");

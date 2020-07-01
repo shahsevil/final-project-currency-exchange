@@ -8,5 +8,4 @@ public class FormReg {
     private String email;
     private String password;
     private String confirm;
-
 }
