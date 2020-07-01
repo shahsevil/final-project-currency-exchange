@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 
@@ -28,12 +29,12 @@ public class History {
     private long toId;
 
     @Column(name = "date_from")
-    private Date dateFrom;
+    private LocalDate dateFrom;
 
     @Column(name = "date_to")
-    private Date dateTo;
+    private LocalDate dateTo;
 
-    @Column(name = "operation-date")
+    @Column(name = "operation_date")
     private Date operationDate;
 
     @Column(name = "rate")
@@ -54,7 +55,7 @@ public class History {
     @JsonIgnore
     @ManyToOne
     @JoinTable(name = "r_u_h",
-            joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "u_id")},
-            inverseJoinColumns = { @JoinColumn(name = "history_id", referencedColumnName = "h_id")})
+            joinColumns = { @JoinColumn(name = "history_id", referencedColumnName = "h_id")},
+            inverseJoinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "u_id")})
     private User user;
 }

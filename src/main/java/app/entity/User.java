@@ -12,14 +12,14 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "u_id")
     private long id;
 
-    @Column(name = "u_full-name")
+    @Column(name = "u_full_name")
     private String full_name;
 
     @Column(name = "u_email")
@@ -28,14 +28,15 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "user")
+    private Collection<History> histories;
+
     public User(String full_name, String email, String password) {
         this.full_name = full_name;
         this.email = email;
         this.password = password;
     }
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "user")
-    private Collection<History> histories;
 
 }
