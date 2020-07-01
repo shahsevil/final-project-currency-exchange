@@ -27,13 +27,13 @@ public class RegisterController {
     public String handle_register_get(Model model) {
         model.addAttribute("user", new User());
         log.info("GET -> /register");
-        return "register";
+        return "registration";
     }
 
     @PostMapping
     public String handle_register_post(FormReg formReg) {
 
-        /**
+        /*
          * username should be passed as a parameter to findUserByUserName() method
          */
         Optional<User> userByEmail = userService.findUserByEmail(formReg.getEmail());
@@ -44,7 +44,7 @@ public class RegisterController {
             throw new PasswordDoesntMatchException();
         } else {
             userService.registerUser(formReg.getFull_name(), formReg.getEmail(), formReg.getPassword());
-            return "redirect:/login";
+            return "redirect:/index";
         }
 
     }
