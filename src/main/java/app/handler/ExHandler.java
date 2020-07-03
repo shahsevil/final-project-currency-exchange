@@ -1,6 +1,6 @@
 package app.handler;
 
-import app.exception.EmailNotUniqueException;
+import app.exception.DuplicateEmailAddressException;
 import app.exception.PasswordDoesntMatchException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.ui.Model;
@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.RedirectView;
 @ControllerAdvice
 public class ExHandler {
 
-    @ExceptionHandler(EmailNotUniqueException.class)
+    @ExceptionHandler(DuplicateEmailAddressException.class)
     public RedirectView handleEmailNotUnique(Model model){
         model.addAttribute("error", "emailnotunique");
         log.warn("This email already exists");
