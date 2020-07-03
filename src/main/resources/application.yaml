@@ -9,7 +9,8 @@ spring:
     url: jdbc:postgresql://ec2-176-34-123-50.eu-west-1.compute.amazonaws.com:5432/df3i5ah7chfpaq
     username: euwhydsblakppw
     password: 54efb3dc9654b12daa3e43e91dd47d14e3cbf3962eb95e22ac2a825d023f8beb
-#    initialization-mode: always
+    data: classpath:/import.sql
+  #    initialization-mode: always
 
   jpa:
     generate-ddl: true
