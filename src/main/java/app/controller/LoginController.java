@@ -13,42 +13,38 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
-@Controller
 @Log4j2
+@Controller
 @RequestMapping("/login")
 public class LoginController {
+  private final UserService userService;
 
-    private final UserService userService;
+  public LoginController(UserService userService) {
+    this.userService = userService;
+  }
 
-    public LoginController(UserService userService) {
-        this.userService = userService;
+  /**
+   * http://localhost:8080/login
+   */
+  @GetMapping
+  public String handle_login_get() {
+    log.info("GET -> /login");
+    return "login";
+  }
+
+  @PostMapping
+  public String handle_post_login(@RequestParam(value = "username") String username,
+                                  @RequestParam(value = "password") String password,
+                                  HttpServletRequest httpServletRequest) {
+
+    Optional<User> byUserNameAndPassword = userService.findUserByEmailAndPassword(username, password);
+    if (!byUserNameAndPassword.isPresent()) {
+      log.warn("POST -> login error");
+      return "login";
     }
-
-    /**
-     * http://localhost:8080/login
-     */
-    @GetMapping
-    public String handle_login_get() {
-        log.info("GET -> /login");
-        return "login";
-    }
-
-    @PostMapping
-    public String handle_post_login(
-            @RequestParam(value = "username") String username,
-            @RequestParam(value = "password") String password,
-            HttpServletRequest httpServletRequest) {
-
-        Optional<User> byUserNameAndPassword = userService.findUserByEmailAndPassword(username, password);
-
-        if (!byUserNameAndPassword.isPresent()) {
-            log.warn("POST -> login error");
-            return "login";
-        }
-
-        HttpSession session = httpServletRequest.getSession();
-        log.info("Session -> ", session);
-        log.info("POST -> /landing");
-        return "landing";
-    }
+    HttpSession session = httpServletRequest.getSession();
+    log.info("Session ->", session);
+    log.info("POST -> /landing");
+    return "landing";
+  }
 }
