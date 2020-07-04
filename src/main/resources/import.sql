@@ -4,7 +4,7 @@ insert into currency (curr_name_abv, curr_name_long) VALUES ('CAD','Canadian Dol
 insert into currency (curr_name_abv, curr_name_long) VALUES ('HKD','Hong Kong Dollar')
 insert into currency (curr_name_abv, curr_name_long) VALUES ('ISK','Icelandic Króna')
 insert into currency (curr_name_abv, curr_name_long) VALUES ('BGN','Bulgarian Lev')
-insert into currency (curr_name_abv, curr_name_long) VALUES ('TRY','European Union')
+insert into currency (curr_name_abv, curr_name_long) VALUES ('CNY','Chinese Yuan')
 insert into currency (curr_name_abv, curr_name_long) VALUES ('PHP','Philippine Peso')
 insert into currency (curr_name_abv, curr_name_long) VALUES ('GBP','British Pound Sterling')
 insert into currency (curr_name_abv, curr_name_long) VALUES ('RUB','Russian Ruble')
