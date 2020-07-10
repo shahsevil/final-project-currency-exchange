@@ -20,6 +20,9 @@ public class Currency {
     @Column(name = "curr_id")
     private long id;
 
+    @Column(name = "curr_symbol")
+    private String symbol;
+
     @Column(name = "curr_name_abv")
     private String abvName;
 
