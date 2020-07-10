@@ -1,5 +1,6 @@
 package app.service;
 
+import app.api.currency_exchange.exchange_rates_api_io.eur_to_usd.EurToUsdResponse;
 import app.api.currency_exchange.exchange_rates_api_io.latest.LatestResponse;
 import app.api.currency_exchange.exchange_rates_api_io.range.RangeResponse;
 import lombok.extern.log4j.Log4j2;
@@ -38,4 +39,13 @@ public class CurrencyAPIService {
     }
   }
 
+  public Optional<EurToUsdResponse> getLatestEurUSD() {
+    String eurToUsdUrl = "https://api.exchangeratesapi.io/latest?symbols=USD";
+    try {
+      return Optional.ofNullable(rest.getForObject(eurToUsdUrl, EurToUsdResponse.class));
+    } catch (Exception x) {
+      log.warn("Something went wrong while processing latest eur to usd rate" + x);
+      return Optional.empty();
+    }
+  }
 }

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/main-page.css">
+  <link rel="stylesheet" href="./css/custom-select.css">
+  <title>Exchange: Main Page</title>
+</head>
+<body>
+<header class="main-header">
+  <a href="main-page.html" class="main-header-logo"><img src="./img/iba-tech-logo-white.svg"
+                                                         alt="IBA Tech Academy"></a>
+  <div class="main-header-wrapper">
+    <div class="main-header-profile-wrapper">
+      <div class="main-header-profile-credentials">
+        <span class="main-header-username">Name Surname</span>
+        <div class="log-out-block">
+          <img src="./img/log-out-icon.svg" alt="Log out">
+          <a href="./login.html" class="log-out-btn">Log out</a>
+        </div>
+      </div>
+      <img class="main-header-user-icon" src="./img/user-icon-with-background.svg" alt="User Icon">
+    </div>
+  </div>
+</header>
+
+<section class="exchange">
+  <div class="exchange-content">
+    <h3 class="exchange-content-heading">
+      Exchange money
+    </h3>
+    <form class="exchange-form">
+      <div class="form-columns">
+        <div class="exchange-form-column">
+
+          <span class="select-name">From</span>
+          <div id="exchange-from">
+            <label for="fromCurr"></label>
+            <select class="form-control" id="fromCurr" name="fromCurr">
+              <option value="0">Please choose a currency</option>
+              <option th:each="currency : ${currencies}"
+                      th:text="${currency.getAbvName()}+' - '+${currency.getLongName()}"
+                      th:value="${currency.getAbvName()}"></option>
+            </select>
+          </div>
+          <div id="exchange-from-result" class="exchange-result">
+            <label>
+              <input type="text" class="currency-input" placeholder="1" name="currFrom" style="padding-left: 275px">
+            </label>
+          </div>
+
+          <span class="select-name">To</span>
+          <div id="exchange-to">
+            <label for="toCurr"></label>
+            <select class="form-control" id="toCurr" name="toCurr">
+              <option value="">Please choose a currency</option>
+              <option th:each="currency : ${currencies}"
+                      th:text="${currency.getAbvName()}+' - '+${currency.getLongName()}"
+                      th:value="${currency.getAbvName()}"></option>
+            </select>
+          </div>
+          <div id="exchange-to-result" class="exchange-result">
+            <span class="currency-input" name="currTo" th:text="${exchange_result}"></span>
+          </div>
+        </div>
+      </div>
+      <div class="form-footer">
+        <!--        <div class="rate">1USD/0.89EUR</div>-->
+        <div class="rate"><span th:text="${from_to}"></span></div>
+        <!--        <a href="main-page-authorized.html" type="submit" class="reset-section-container-form-login">Exchange</a>-->
+        <a href="main-page-authorized.html" type="submit" class="reset-section-container-form-login">Exchange</a>
+        <!--        <div class="rate">1EUR/1.12USD</div>-->
+        <div class="rate"><span th:text="${to_from}"></span></div>
+      </div>
+    </form>
+  </div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript"
+        src="https://cdn.rawgit.com/prashantchaudhary/ddslick/master/jquery.ddslick.min.js"></script>
+</body>
+</html>
