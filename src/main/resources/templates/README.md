@@ -33,3 +33,7 @@ The algorythm that a new user should follow consists of the following:
 6) If an authorized user has picked the dates and clicked the `Exchange` button - he will be redirected to the `Exchange rate dates` page, where he may see how the currency exchange rate changed based on the time period. 
 
 ### That's about it. However, there is one thing left. Please keep in mind that the websites are "Work In Progress", which means that some html/css/js files may change during updates. Also you can ask for whatever Front-End feature you want to be implemented and it will be so. Good Luck! 
+
+
+given:  http://www.alexshmyrkov.space/Currency%20Exchange/main-page.html
+ours:   http://localhost:8080/

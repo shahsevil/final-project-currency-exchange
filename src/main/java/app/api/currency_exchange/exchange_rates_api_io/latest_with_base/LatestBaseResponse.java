@@ -1,6 +1,5 @@
-package app.api.currency_exchange.exchange_rates_api_io.latest;
+package app.api.currency_exchange.exchange_rates_api_io.latest_with_base;
 
-import app.api.currency_exchange.exchange_rates_api_io.RRates;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
@@ -8,8 +7,8 @@ import java.time.LocalDate;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class LatestResponse {
-  public RRates rates;
+public class LatestBaseResponse {
+  public LatestRates rates;
   public String base;
   public LocalDate date;
 }

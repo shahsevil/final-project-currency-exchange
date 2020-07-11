@@ -1,8 +1,7 @@
 package app.service;
 
 import app.api.currency_exchange.exchange_rates_api_io.eur_to_usd.EurToUsdResponse;
-import app.api.currency_exchange.exchange_rates_api_io.latest.LatestResponse;
-import app.api.currency_exchange.exchange_rates_api_io.range.RangeResponse;
+import app.api.currency_exchange.exchange_rates_api_io.latest_with_base.LatestBaseResponse;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -19,32 +18,22 @@ public class CurrencyAPIService {
     this.rest = rest;
   }
 
-  public Optional<LatestResponse> obtainLatestRates(String currFrom) {
-    String latestUrl = String.format("https://api.exchangeratesapi.io/latest?base=%s", currFrom);
-    try {
-      return Optional.ofNullable(rest.getForObject(latestUrl, LatestResponse.class));
-    } catch (Exception x) {
-      log.warn("Something went wrong while processing range rates");
-      return Optional.empty();
-    }
-  }
-
-  public Optional<RangeResponse> obtainRangeRates(String currFrom, LocalDate dateFrom, LocalDate dateTo) {
-    String rangeUrl = String.format("https://api.exchangeratesapi.io/history?start_at=%s&end_at=%s&base=%s", dateFrom, dateTo, currFrom);
-    try {
-      return Optional.ofNullable(rest.getForObject(rangeUrl, RangeResponse.class));
-    } catch (Exception x) {
-      log.warn("Something went wrong while processing range rates");
-      return Optional.empty();
-    }
-  }
-
   public Optional<EurToUsdResponse> getLatestEurUSD() {
     String eurToUsdUrl = "https://api.exchangeratesapi.io/latest?symbols=USD";
     try {
       return Optional.ofNullable(rest.getForObject(eurToUsdUrl, EurToUsdResponse.class));
     } catch (Exception x) {
       log.warn("Something went wrong while processing latest eur to usd rate" + x);
+      return Optional.empty();
+    }
+  }
+
+  public Optional<LatestBaseResponse> getLatestRatesWithBase(String currFrom) {
+    String latestFromTo = String.format("https://api.exchangeratesapi.io/latest?base=%s", currFrom);
+    try {
+      return Optional.ofNullable(rest.getForObject(latestFromTo, LatestBaseResponse.class));
+    } catch (Exception x) {
+      log.warn("Something went wrong while processing latest with base " + x);
       return Optional.empty();
     }
   }
