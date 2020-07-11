@@ -1,9 +1,25 @@
 server:
-  port: 8080
+  port: 8585
 
 spring:
   main:
     banner-mode: console
+
+  mail:
+    host: smtp.google.com
+    username: mammadzademaryam@gmail.com
+    password: secretiba123!
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+
+
+
 
   datasource:
     url: jdbc:postgresql://ec2-176-34-123-50.eu-west-1.compute.amazonaws.com:5432/df3i5ah7chfpaq
@@ -17,3 +33,4 @@ spring:
     hibernate:
       ddl-auto: create
     show-sql: true
+
