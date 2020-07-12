@@ -3,6 +3,7 @@ package app.controller;
 import app.entity.ResetToken;
 import app.entity.User;
 import app.exception.UserNotFoundException;
+import app.form.FormNewPassword;
 import app.form.FormReset;
 import app.service.MailSenderService;
 import app.service.ResetPasswordService;
@@ -68,5 +69,18 @@ public class ForgotPasswordController {
         return new RedirectView("reset-password") ;
         }
 
+        @GetMapping("/newpassword")
+    public String handle_newPass_G(@RequestParam() String  email, @RequestParam String token){
+        resetPasswordService.validateToken(email, token);
+        return "reset-password";
+
+        }
+
+        @PostMapping("/newpassword")
+    public RedirectView handle_newPass_P(@RequestParam () String email, @RequestParam String token, FormNewPassword formNewPassword){
+        resetPasswordService.validateToken(email, token);
+        userService.updatePassword(email, formNewPassword.getPassword(), formNewPassword.getConfirmpassword());
+        return new RedirectView("login");
+        }
 
 }
