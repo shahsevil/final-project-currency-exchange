@@ -39,4 +39,7 @@ public class User {
         this.password = password;
     }
 
+    public User(long id) {
+        this.id = id;
+    }
 }

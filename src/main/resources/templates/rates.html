@@ -1,122 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/rates.css">
-    <link rel="stylesheet" href="../static/css/custom-select.css">
-    <title>Exchange: Rates</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/rates.css">
+  <link rel="stylesheet" href="./css/custom-select.css">
+  <title>Exchange: Rates</title>
 </head>
 
 <body>
-    <header class="main-header">
-        <a href="main-page.html" class="main-header-logo"><img src="../static/img/iba-tech-logo-white.svg"
-                                                               alt="IBA Tech Academy"></a>
-        <div class="main-header-wrapper">
-            <div class="main-header-profile-wrapper">
-                <div class="main-header-profile-credentials">
-                    <span class="main-header-username">Anatolii Safronov</span>
-                    <div class="log-out-block">
-                        <img src="../static/img/log-out-icon.svg" alt="Log out">
-                        <a href="login.html" class="log-out-btn">Log out</a>
-                    </div>
-                </div>
-                <img class="main-header-user-icon" src="../static/img/user-icon-with-background.svg" alt="User Icon">
-            </div>
+<header class="main-header">
+  <a href="main-page.html" class="main-header-logo">
+    <img src="./img/iba-tech-logo-white.svg" alt="IBA Tech Academy">
+  </a>
+  <div class="main-header-wrapper">
+    <div class="main-header-profile-wrapper">
+      <div class="main-header-profile-credentials">
+        <span class="main-header-username" th:text="${name_and_surname}"></span>
+        <div class="log-out-block">
+          <img src="./img/log-out-icon.svg" alt="Log out">
+          <a href="login.html" class="log-out-btn">Log out</a>
         </div>
-    </header>
+      </div>
+      <img class="main-header-user-icon" src="./img/user-icon-with-background.svg" alt="User Icon">
+    </div>
+  </div>
+</header>
 
-    <section class="rates">
-        <div class="exchange-content">
-            <h3 class="exchange-content-heading">
-                Exchange rate dates
-            </h3>
-            <p class="exchange-content-subheading">
-                12 June 2020/21 June 2020
-            </p>
-            <ul class="rates-list">
-                <li class="rates-item">
-                    <div class="rate">1USD/0.89EUR</div>
-                    <p class="rate-date">
-                        21 June 2020
-                    </p>
-                    <div class="rate">1EUR/1.12USD</div>
-                </li>
-                <li class="rates-item">
-                    <div class="rate">1USD/0.89EUR</div>
-                    <p class="rate-date">
-                        20 June 2020
-                    </p>
-                    <div class="rate">1EUR/1.12USD</div>
-                </li>
-                <li class="rates-item">
-                    <div class="rate">1USD/0.89EUR</div>
-                    <p class="rate-date">
-                        19 June 2020
-                    </p>
-                    <div class="rate">1EUR/1.12USD</div>
-                </li>
-                <li class="rates-item">
-                    <div class="rate">1USD/0.89EUR</div>
-                    <p class="rate-date">
-                        18 June 2020
-                    </p>
-                    <div class="rate">1EUR/1.12USD</div>
-                </li>
-                <li class="rates-item">
-                    <div class="rate">1USD/0.89EUR</div>
-                    <p class="rate-date">
-                        17 June 2020
-                    </p>
-                    <div class="rate">1EUR/1.12USD</div>
-                </li>
-                <li class="rates-item">
-                    <div class="rate">1USD/0.89EUR</div>
-                    <p class="rate-date">
-                        16 June 2020
-                    </p>
-                    <div class="rate">1EUR/1.12USD</div>
-                </li>
-                <li class="rates-item">
-                    <div class="rate">1USD/0.89EUR</div>
-                    <p class="rate-date">
-                        15 June 2020
-                    </p>
-                    <div class="rate">1EUR/1.12USD</div>
-                </li>
-                <li class="rates-item">
-                    <div class="rate">1USD/0.89EUR</div>
-                    <p class="rate-date">
-                        14 June 2020
-                    </p>
-                    <div class="rate">1EUR/1.12USD</div>
-                </li>
-                <li class="rates-item">
-                    <div class="rate">1USD/0.89EUR</div>
-                    <p class="rate-date">
-                        13 June 2020
-                    </p>
-                    <div class="rate">1EUR/1.12USD</div>
-                </li>
-                <li class="rates-item">
-                    <div class="rate">1USD/0.89EUR</div>
-                    <p class="rate-date">
-                        12 June 2020
-                    </p>
-                    <div class="rate">1EUR/1.12USD</div>
-                </li>
+<section class="rates">
+  <div class="exchange-content">
+    <h3 class="exchange-content-heading">Exchange rate dates</h3>
+    <p class="exchange-content-subheading"><span th:text="${from_date} + ' <-> ' + ${to_date}"></span></p>
 
-            </ul>
-            <a href="main-page-authorized.html" class="reset-section-container-form-login button-rates">Go back</a>
+    <ul class="rates-list" th:each="rate : ${rates}">
+      <li class="rates-item">
+        <div class="rate"><span th:text="${from_to}"></span></div>
+        <p class="rate-date"><span th:text="${date}"></span></p>
+        <div class="rate"><span th:text="${to_from}"></span></div>
+      </li>
+    </ul>
 
-        </div>
-
-
-    </section>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+    <button type="submit" name="go_back" value="go_back"
+            class="reset-section-container-form-login">Go Back
+    </button>
+  </div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
-
-
 </html>

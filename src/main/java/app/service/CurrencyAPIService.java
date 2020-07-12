@@ -2,6 +2,7 @@ package app.service;
 
 import app.api.currency_exchange.exchange_rates_api_io.eur_to_usd.EurToUsdResponse;
 import app.api.currency_exchange.exchange_rates_api_io.latest_with_base.LatestBaseResponse;
+import app.api.currency_exchange.exchange_rates_api_io.range_with_base.HistoricalRates;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -32,6 +33,19 @@ public class CurrencyAPIService {
     String latestFromTo = String.format("https://api.exchangeratesapi.io/latest?base=%s", currFrom);
     try {
       return Optional.ofNullable(rest.getForObject(latestFromTo, LatestBaseResponse.class));
+    } catch (Exception x) {
+      log.warn("Something went wrong while processing latest with base " + x);
+      return Optional.empty();
+    }
+  }
+
+  public Optional<HistoricalRates> getRangeWithBase(LocalDate fromDate, LocalDate toDate, String currFrom) {
+
+    String rangeRateUrl = String.format("https://api.exchangeratesapi.io/history?start_at=%s&end_at=%s&base=%s",
+            fromDate, toDate, currFrom);
+    log.info("url is : " + rangeRateUrl);
+    try {
+      return Optional.ofNullable(rest.getForObject(rangeRateUrl, HistoricalRates.class));
     } catch (Exception x) {
       log.warn("Something went wrong while processing latest with base " + x);
       return Optional.empty();

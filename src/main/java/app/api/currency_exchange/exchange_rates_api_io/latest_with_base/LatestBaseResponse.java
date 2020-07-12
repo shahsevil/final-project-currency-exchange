@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LatestBaseResponse {
-  public LatestRates rates;
+  public CurrencyList rates;
   public String base;
   public LocalDate date;
 }

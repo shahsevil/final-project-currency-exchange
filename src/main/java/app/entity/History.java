@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -35,7 +36,7 @@ public class History {
     private LocalDate dateTo;
 
     @Column(name = "operation_date")
-    private Date operationDate;
+    private LocalDate operationDate;
 
     @Column(name = "rate")
     private double rate;
@@ -50,12 +51,23 @@ public class History {
             inverseJoinColumns = {@JoinColumn(name = "currency_id", referencedColumnName = "curr_id")})
     private Collection<Currency> currencies;
 
-
-
     @JsonIgnore
     @ManyToOne
     @JoinTable(name = "r_u_h",
             joinColumns = { @JoinColumn(name = "history_id", referencedColumnName = "h_id")},
             inverseJoinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "u_id")})
     private User user;
+
+    public History(long fromId, long toId, LocalDate dateFrom, LocalDate dateTo, LocalDate operationDate,
+                       double rate, double amount, Collection<Currency> currencies, User user) {
+        this.fromId = fromId;
+        this.toId = toId;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
+        this.operationDate = operationDate;
+        this.rate = rate;
+        this.amount = amount;
+        this.currencies = currencies;
+        this.user = user;
+    }
 }
