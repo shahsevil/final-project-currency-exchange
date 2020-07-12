@@ -149,9 +149,10 @@ public class ExchangeAuthorizedController {
       // TODO rate history here
       log.info("Redirect -> /rates");
       return "redirect:/rates";
-    } else if ("uer_history".equals(btnUserHistory)) {
+    } else if ("user_history".equals(btnUserHistory)) {
       // TODO user history here
+      log.info("Redirect -> /rates");
+      return "redirect:/rates";
     } else throw new WrongActionException();
-    return "main-page-authorized-new";
   }
 }

@@ -7,5 +7,7 @@ public class FormReg {
     private String full_name;
     private String email;
     private String password;
-    private String confirm;
+    private String confirmPassword;
+    private String btnRegister;
+
 }

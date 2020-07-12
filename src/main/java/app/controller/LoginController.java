@@ -1,6 +1,8 @@
 package app.controller;
 
 import app.entity.User;
+import app.exception.UserNotFoundException;
+import app.exception.WrongActionException;
 import app.service.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -17,10 +19,10 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/login")
 public class LoginController {
-  private final UserService userService;
+  private final UserService USER_SERVICE;
 
-  public LoginController(UserService userService) {
-    this.userService = userService;
+  public LoginController(UserService USER_SERVICE) {
+    this.USER_SERVICE = USER_SERVICE;
   }
 
   /**
@@ -33,18 +35,20 @@ public class LoginController {
   }
 
   @PostMapping
-  public String handle_post_login(@RequestParam(value = "username") String username,
-                                  @RequestParam(value = "password") String password,
+  public String handle_post_login(@RequestParam(value = "username", required = false) String username,
+                                  @RequestParam(value = "password", required = false) String password,
+                                  @RequestParam(value = "login", required = false) String btnLogin,
                                   HttpServletRequest httpServletRequest) {
 
-    Optional<User> byUserNameAndPassword = userService.findUserByEmailAndPassword(username, password);
-    if (!byUserNameAndPassword.isPresent()) {
-      log.warn("POST -> login error");
-      return "login";
-    }
-    HttpSession session = httpServletRequest.getSession();
-    log.info("Session ->", session);
-    log.info("POST -> /landing");
-    return "landing";
+    if ("login".equals(btnLogin)) {
+      Optional<User> byUserNameAndPassword = USER_SERVICE.findUserByEmailAndPassword(username, password);
+      if (byUserNameAndPassword.isPresent()) {
+        log.info("Login successfully completed!");
+        HttpSession session = httpServletRequest.getSession();
+        log.info("Session ->" + session);
+        log.info("POST -> /landing");
+        return "landing";
+      } else throw new UserNotFoundException();
+    } else throw new WrongActionException();
   }
 }
