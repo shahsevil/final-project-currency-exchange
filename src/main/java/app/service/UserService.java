@@ -12,24 +12,24 @@ import java.util.Optional;
 @Log4j2
 @Service
 public class UserService {
-    private final UserRepo userRepo;
+    private final UserRepo USER_REPO;
 
-    public UserService(UserRepo userRepo) {
-        this.userRepo = userRepo;
+    public UserService(UserRepo USER_REPO) {
+        this.USER_REPO = USER_REPO;
     }
 
     public Optional<User> findUserByEmail(String email) {
-        return userRepo.findUserByEmail(email);
+        return USER_REPO.findUserByEmail(email);
     }
 
     public Optional<User> findUserByEmailAndPassword(String userName, String password) {
-        return userRepo.findUserByEmailAndPassword(userName, password);
+        return USER_REPO.findUserByEmailAndPassword(userName, password);
     }
 
 
     public void registerUser(String full_name, String email, String password) {
         User user = new User(full_name, email, password);
-        userRepo.save(user);
+        USER_REPO.save(user);
         log.info("New user successfully registered!");
     }
 
@@ -45,5 +45,9 @@ public class UserService {
 
         }
 
+    }
+
+    public Optional<User> findUserById(long user_id) {
+        return USER_REPO.findById(user_id);
     }
 }
