@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -27,6 +28,10 @@ public class User {
 
     @Column(name = "password")
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    private Set<ResetToken> resetTokens;
+
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,
