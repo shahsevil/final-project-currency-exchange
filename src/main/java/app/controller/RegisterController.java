@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Log4j2
 @Controller
-@RequestMapping("/register")
+@RequestMapping("/registration")
 public class RegisterController {
   private final UserService userService;
 
@@ -25,8 +25,8 @@ public class RegisterController {
   @GetMapping
   public String handle_register_get(Model model) {
     model.addAttribute("user", new User());
-    log.info("GET -> /register");
-    return "registration";
+    log.info("GET -> /registration.html");
+    return "registration.html";
   }
 
   @PostMapping

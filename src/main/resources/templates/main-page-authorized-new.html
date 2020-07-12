@@ -1,24 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./css/main-page.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="./css/main-page-authorized.css">
   <link rel="stylesheet" href="./css/custom-select.css">
-  <title>Exchange: Main Page</title>
+  <link rel="stylesheet" href="./css/drpmenu.css">
+  <title>Exchange</title>
 </head>
+
 <body>
 <header class="main-header">
-  <a href="main-page.html" class="main-header-logo"><img src="./img/iba-tech-logo-white.svg" alt="IBA Tech Academy"></a>
+  <a href="main-page.html" class="main-header-logo">
+    <img src="./img/iba-tech-logo-white.svg" alt="IBA Tech Academy"></a>
   <div class="main-header-wrapper">
     <div class="main-header-profile-wrapper">
       <div class="main-header-profile-credentials">
+        <span class="main-header-username" th:text="${name_and_surname}"></span>
         <form method="post">
-          <button type="submit" name="login" value="login" style="background: none; border: none;" class="log-out-btn">
-            <span class="log-out-block">Login</span>
-          </button>
+          <div class="log-out-block">
+            <img src="./img/log-out-icon.svg" alt="Log out">
+            <button name="logout" value="logout" class="" style="background: none; border: none;">
+              <span class="log-out-block">Log out</span>
+            </button>
+          </div>
         </form>
       </div>
+      <img class="main-header-user-icon" src="./img/user-icon-with-background.svg" alt="User Icon">
     </div>
   </div>
 </header>
@@ -26,8 +36,10 @@
 <section class="exchange">
   <div class="exchange-content">
     <h3 class="exchange-content-heading">Exchange money</h3>
+    <h3 class="exchange-content-heading exchange-content-heading-absolute">Exchange rate date</h3>
     <form class="exchange-form" method="post">
       <div class="form-columns">
+
         <div class="exchange-form-column">
           <span class="select-name">From</span>
           <div id="exchange-from">
@@ -45,7 +57,9 @@
                      th:placeholder="${entered_value}" style="text-align: center">
             </label>
           </div>
+        </div>
 
+        <div class="exchange-form-column">
           <span class="select-name">To</span>
           <div id="exchange-to">
             <label for="toCurr"></label>
@@ -61,17 +75,50 @@
           </div>
         </div>
       </div>
+
+      <div class="form-columns">
+        <div class="exchange-form-column">
+          <span class="select-name">From</span>
+          <label for="date-from"></label>
+          <input type="date" id="date-from" class="datepicker-input" name="fromDate">
+          <div class="datepicker-value" id="date-from-value"></div>
+        </div>
+
+        <div class="exchange-form-column">
+          <span class="select-name">To</span>
+          <label for="date-to"></label>
+          <input type="date" id="date-to" class="datepicker-input" name="toDate">
+          <div class="datepicker-value" id="date-to-value"></div>
+        </div>
+
+      </div>
+
+      <p></p>
+
       <div class="form-footer">
         <div class="rate"><span th:text="${from_to}"></span></div>
-        <button type="submit" name="exchange" value="exchange" class="reset-section-container-form-login">Exchange
+        <button type="submit" name="exchange" value="exchange"
+                class="reset-section-container-form-login">Exchange
         </button>
         <div class="rate"><span th:text="${to_from}"></span></div>
       </div>
+
+      <p></p>
+      <button type="submit" name="rate_history" value="rate_history"
+              class="reset-section-container-form-login">Rates history
+      </button>
+      <p></p>
+      <button type="submit" name="user_history" value="user_history"
+              class="reset-section-container-form-login">User's actions history
+      </button>
     </form>
   </div>
 </section>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://cdn.rawgit.com/prashantchaudhary/ddslick/master/jquery.ddslick.min.js"
         type="text/javascript"></script>
+<script src="./js/drpmenu.js" type="text/javascript"></script>
 </body>
 </html>

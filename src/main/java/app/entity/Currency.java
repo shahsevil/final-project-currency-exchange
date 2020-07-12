@@ -33,4 +33,8 @@ public class Currency {
     @ManyToMany(cascade = CascadeType.ALL,
             mappedBy = "currencies")
     private List<History> histories;
+
+    public Currency(long id) {
+        this.id = id;
+    }
 }

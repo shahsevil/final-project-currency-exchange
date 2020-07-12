@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class LatestRates {
+public class CurrencyList {
   public double CAD;
   public double HKD;
   public double ISK;
