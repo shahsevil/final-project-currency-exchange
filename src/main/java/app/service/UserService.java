@@ -1,5 +1,6 @@
 package app.service;
 
+import app.entity.ResetToken;
 import app.entity.User;
 import app.repo.UserRepo;
 import lombok.extern.log4j.Log4j2;
@@ -23,6 +24,7 @@ public class UserService {
   public Optional<User> findUserByEmailAndPassword(String userName, String password) {
     return userRepo.findUserByEmailAndPassword(userName, password);
   }
+
 
   public void registerUser(String full_name, String email, String password) {
     User user = new User(full_name, email, password);
