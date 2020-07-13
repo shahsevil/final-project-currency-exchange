@@ -11,13 +11,13 @@
 
 <body>
 <header class="main-header">
-  <a href="main-page.html" class="main-header-logo">
+  <a href="/main-page" class="main-header-logo">
     <img src="./img/iba-tech-logo-white.svg" alt="IBA Tech Academy">
   </a>
   <div class="main-header-wrapper">
     <div class="main-header-profile-wrapper">
       <div class="main-header-profile-credentials">
-        <span class="main-header-username" th:text="${name_and_surname}"></span>
+        <span class="main-header-username" th:text="${full_name}"></span>
         <div class="log-out-block">
           <img src="./img/log-out-icon.svg" alt="Log out">
           <a href="login.html" class="log-out-btn">Log out</a>
@@ -35,15 +35,17 @@
 
     <ul class="rates-list" th:each="rate : ${rates}">
       <li class="rates-item">
-        <div class="rate"><span th:text="${from_to}"></span></div>
-        <p class="rate-date"><span th:text="${date}"></span></p>
-        <div class="rate"><span th:text="${to_from}"></span></div>
+        <div class="rate"><span th:text="${rate.representFrom()}"></span></div>
+        <p class="rate-date"><span th:text="${rate.getDate()}"></span></p>
+        <div class="rate"><span th:text="${rate.representTo()}"></span></div>
       </li>
     </ul>
 
-    <button type="submit" name="go_back" value="go_back"
-            class="reset-section-container-form-login">Go Back
-    </button>
+    <form method="post">
+      <button type="submit" name="go_back" value="go_back"
+              class="reset-section-container-form-login">Go Back
+      </button>
+    </form>
   </div>
 </section>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

@@ -47,7 +47,7 @@ public class LoginController {
         HttpSession session = httpServletRequest.getSession();
         log.info("Session ->" + session);
         log.info("POST -> /landing");
-        return "landing";
+        return "redirect:landing";
       } else throw new UserNotFoundException();
     } else throw new WrongActionException();
   }

@@ -26,7 +26,6 @@ public class UserService {
         return USER_REPO.findUserByEmailAndPassword(userName, password);
     }
 
-
     public void registerUser(String full_name, String email, String password) {
         User user = new User(full_name, email, password);
         USER_REPO.save(user);

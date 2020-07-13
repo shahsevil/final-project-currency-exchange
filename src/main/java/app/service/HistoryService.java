@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Optional;
 
 @Log4j2
 @Service
@@ -29,5 +30,9 @@ public class HistoryService {
     log.info("history is : " + history);
 
     HISTORY_REPO.save(history);
+  }
+
+  public Optional<History> findHistory(long historyId) {
+    return HISTORY_REPO.findById(historyId);
   }
 }

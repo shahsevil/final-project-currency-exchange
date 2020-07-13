@@ -7,6 +7,7 @@ import app.exception.WrongActionException;
 import app.service.CurrencyAPIService;
 import app.service.CurrencyService;
 import app.service.HistoryService;
+import app.utils.Util;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -22,6 +24,7 @@ import java.util.Optional;
 
 import static app.utils.MathUtils.round_till;
 import static app.utils.Util.getOrDefault;
+import static app.utils.Util.getOrDefaultDate;
 
 @Log4j2
 @Controller
@@ -74,24 +77,27 @@ public class ExchangeAuthorizedController {
                                      @RequestParam(value = "fromCurr", required = false) String fromCurr,
                                      @RequestParam(value = "fromValue", required = false) Double fromValue,
                                      @RequestParam(value = "toCurr", required = false) String toCurr,
-                                     @RequestParam(value = "fromDate", required = false) LocalDate fDate,
-                                     @RequestParam(value = "toDate", required = false) LocalDate tDate,
+                                     @RequestParam(value = "fromDate", required = false) String fDate,
+                                     @RequestParam(value = "toDate", required = false) String tDate,
                                      @RequestParam(value = "exchange", required = false) String btnExchange,
                                      @RequestParam(value = "rate_history", required = false) String btnRateHistory,
                                      @RequestParam(value = "user_history", required = false) String btnUserHistory,
-                                     Model model) {
+                                     Model model,
+                                     RedirectAttributes redirectAttributes) {
 
     log.info("Calculate exchange -> main-page-authorized");
 
     log.info("fromCurrency is " + fromCurr);
     log.info("toCurrency is " + toCurr);
     log.info("enteredValue is " + fromValue);
+    log.info("fromDate is " + fDate);
+    log.info("toDate is " + tDate);
 
     String fromCurrency = getOrDefault(fromCurr, "EUR");
     double enteredValue = getOrDefault(fromValue, 1D);
     String toCurrency = getOrDefault(toCurr, "USD");
-    LocalDate fromDate = getOrDefault(fDate, LocalDate.now().minusDays(3));
-    LocalDate toDate = getOrDefault(tDate, LocalDate.now());
+    LocalDate fromDate = getOrDefaultDate(fDate, LocalDate.now().minusDays(3));
+    LocalDate toDate = getOrDefaultDate(tDate, LocalDate.now());
 
     log.info("fromCurrency is " + fromCurrency);
     log.info("toCurrency is " + toCurrency);
@@ -113,7 +119,7 @@ public class ExchangeAuthorizedController {
       log.info("range response end_date is " + usd.end_at);
       log.info("range response abc is " + usd.rates.toString());
 
-      double rate = usd.rates.get(fromDate.toString())
+      double rate = usd.rates.get(fromDate)
               .getAllCurrencyNamesAndValues()
               .entrySet()
               .stream()
@@ -143,16 +149,18 @@ public class ExchangeAuthorizedController {
       model.addAttribute("exchange_result", round_till(enteredValue * rate, 1000));
       model.addAttribute("from_to", String.format("1%s/%s%s", toCurrency, round_till(1 / rate, 1000), fromCurrency));
       model.addAttribute("to_from", String.format("1%s/%s%s", fromCurrency, round_till(rate, 1000), toCurrency));
-
       return "main-page-authorized-new";
     } else if ("rate_history".equals(btnRateHistory)) {
-      // TODO rate history here
+      redirectAttributes.addAttribute("fromCurrency", fromCurrency);
+      redirectAttributes.addAttribute("toCurrency", toCurrency);
+      redirectAttributes.addAttribute("fromDate", fromDate);
+      redirectAttributes.addAttribute("toDate", toDate);
       log.info("Redirect -> /rates");
       return "redirect:/rates";
     } else if ("user_history".equals(btnUserHistory)) {
       // TODO user history here
-      log.info("Redirect -> /rates");
-      return "redirect:/rates";
+      log.info("Redirect -> /user-history");
+      return "redirect:/user-history";
     } else throw new WrongActionException();
   }
 }

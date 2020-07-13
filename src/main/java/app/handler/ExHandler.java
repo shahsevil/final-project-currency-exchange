@@ -46,5 +46,12 @@ public class ExHandler {
     return new RedirectView("./main-page-authorized-new");
   }
 
+  @ExceptionHandler(HistoryNotFoundException.class)
+  public RedirectView handleNoHistory(Model model) {
+    model.addAttribute("error", "not found any histories");
+    log.warn("Histories not found!");
+    return new RedirectView("./main-page-authorized-new");
+  }
+
 
 }
