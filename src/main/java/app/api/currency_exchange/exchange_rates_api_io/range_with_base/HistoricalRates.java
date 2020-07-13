@@ -10,12 +10,12 @@ import java.util.Map;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class HistoricalRates {
-  public Map<String, CurrencyList> rates;
+  public Map<LocalDate, CurrencyList> rates;
   public String base;
   public LocalDate start_at;
   public LocalDate end_at;
 
-  public HistoricalRates(Map<String, CurrencyList> rates, String base, LocalDate start_at, LocalDate end_at) {
+  public HistoricalRates(Map<LocalDate, CurrencyList> rates, String base, LocalDate start_at, LocalDate end_at) {
     this.rates = rates;
     this.base = base;
     this.start_at = start_at;

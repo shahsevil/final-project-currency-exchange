@@ -20,7 +20,9 @@
           <span class="main-header-username" th:text="${full_name}"></span>
           <div class="log-out-block">
             <img src="./img/log-out-icon.svg" alt="Log out">
-            <button class="log-out-btn" type="submit" name="logout" value="logout">Log out</button>
+            <button name="logout" value="logout" style="background: none; border: none;">
+              <span class="log-out-block">Log out</span>
+            </button>
           </div>
         </div>
         <img class="main-header-user-icon" src="./img/user-icon-with-background.svg" alt="User Icon">

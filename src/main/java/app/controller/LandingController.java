@@ -43,14 +43,14 @@ public class LandingController {
 
   @PostMapping
   public String handle_landing_post(@RequestParam(value = "logout", required = false) String logout,
-                                    @RequestParam(value = "get_started", required = false) String get_started) {
+                                    @RequestParam(value = "get_started", required = false) String getStarted) {
     if ("logout".equals(logout)) {
       // TODO make logout here
       log.info("Logout; Redirect -> /login");
       return "redirect:/login";
-    } else if ("get_started".equals(get_started)) {
+    } else if ("get_started".equals(getStarted)) {
       log.info("Redirect -> /main-page-authorized-new");
-      return "main-page-authorized-new";
+      return "redirect:/authorized";
     } else throw new WrongActionException();
   }
 }

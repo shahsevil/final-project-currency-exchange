@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="./css/user-history.css">
+</head>
+<body>
+<table style="width:100%">
+  <thead>
+  <tr>
+    <th>User-id</th>
+    <th>Full Name</th>
+    <th>Email</th>
+    <th>Amount</th>
+    <th>Rate</th>
+    <th>Date-from</th>
+    <th>Date-to</th>
+    <th>Currency-From</th>
+    <th>Currency-To</th>
+    <th>Operation-Date</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="history : ${histories}">
+    <th th:text="${user_id}"></th>
+    <th th:text="${full name}"></th>
+    <th th:text="${email}"></th>
+    <th th:text="${amount}"></th>
+    <th th:text="${rate}"></th>
+    <th th:text="${date-from}"></th>
+    <th th:text="${date-to}"></th>
+    <th th:text="${currency-From}"></th>
+    <th th:text="${currency-To}"></th>
+    <th th:text="${operation-Date}"></th>
+    <!--    <td><p th:text="${history.response}"></p></td>-->
+  </tr>
+</table>
+</body>
+</html>
