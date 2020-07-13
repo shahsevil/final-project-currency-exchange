@@ -7,7 +7,6 @@ import app.exception.WrongActionException;
 import app.service.CurrencyAPIService;
 import app.service.CurrencyService;
 import app.service.HistoryService;
-import app.utils.Util;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

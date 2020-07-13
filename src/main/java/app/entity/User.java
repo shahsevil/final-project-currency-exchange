@@ -15,36 +15,36 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "u_id")
-    private long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "u_id")
+  private long id;
 
-    @Column(name = "u_full_name")
-    private String full_name;
+  @Column(name = "u_full_name")
+  private String full_name;
 
-    @Column(name = "u_email")
-    private String email;
+  @Column(name = "u_email")
+  private String email;
 
-    @Column(name = "password")
-    private String password;
+  @Column(name = "password")
+  private String password;
 
-    @OneToMany(mappedBy = "user")
-    private Set<ResetToken> resetTokens;
+  @OneToMany(mappedBy = "user")
+  private Set<ResetToken> resetTokens;
 
 
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL,
-            mappedBy = "user")
-    private Collection<History> histories;
+  @JsonIgnore
+  @OneToMany(cascade = CascadeType.ALL,
+          mappedBy = "user")
+  private Collection<History> histories;
 
-    public User(String full_name, String email, String password) {
-        this.full_name = full_name;
-        this.email = email;
-        this.password = password;
-    }
+  public User(String full_name, String email, String password) {
+    this.full_name = full_name;
+    this.email = email;
+    this.password = password;
+  }
 
-    public User(long id) {
-        this.id = id;
-    }
+  public User(long id) {
+    this.id = id;
+  }
 }

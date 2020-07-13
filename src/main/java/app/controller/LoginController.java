@@ -45,6 +45,7 @@ public class LoginController {
       if (byUserNameAndPassword.isPresent()) {
         log.info("Login successfully completed!");
         HttpSession session = httpServletRequest.getSession();
+        session.setAttribute("user_id", byUserNameAndPassword.get().getId());
         log.info("Session ->" + session);
         log.info("POST -> /landing");
         return "redirect:landing";
