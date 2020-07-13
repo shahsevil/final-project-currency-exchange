@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
 
 @Log4j2
 @Controller
@@ -36,16 +35,21 @@ public class UserHistoryController {
    */
   @GetMapping
   public String handle_user_history_get(Model model) {
+    class HistoryResponse {
+
+    }
+
     log.info("GET -> /user-history");
 
     final long user_id = 1;
 
     Optional<User> user = USER_SERVICE.findUserById(user_id);
     if (user.isPresent()) {
+      List<History> histories = USER_HISTORY_SERVICE.getHistories(user_id);
+      if (histories.size() > 0) {
 
-      List<Long> historyIds = USER_HISTORY_SERVICE.getHistoryIds(user_id);
-      if (historyIds.size() > 0) {
-        // TODO find histories
+//      histories.stream().map(h -> h.getCurrencies())
+
         return "user-history";
       } else throw new HistoryNotFoundException();
     } else throw new WrongActionException();
