@@ -15,26 +15,37 @@
     <th>Rate</th>
     <th>Date-from</th>
     <th>Date-to</th>
+    <th>Operation-Date</th>
     <th>Currency-From</th>
     <th>Currency-To</th>
-    <th>Operation-Date</th>
-
   </tr>
   </thead>
   <tbody>
-  <tr th:each="history : ${histories}">
-    <th th:text="${user_id}"></th>
-    <th th:text="${full name}"></th>
-    <th th:text="${email}"></th>
-    <th th:text="${amount}"></th>
-    <th th:text="${rate}"></th>
-    <th th:text="${date-from}"></th>
-    <th th:text="${date-to}"></th>
-    <th th:text="${currency-From}"></th>
-    <th th:text="${currency-To}"></th>
-    <th th:text="${operation-Date}"></th>
-    <!--    <td><p th:text="${history.response}"></p></td>-->
-  </tr>
+    <tr th:each="history : ${histories}">
+      <td th:text="${history.getU_id()}"></td>
+      <td th:text="${history.getU_full_name()}"></td>
+      <td th:text="${history.getU_email()}"></td>
+      <td th:text="${history.getAmount()}"></td>
+      <td th:text="${history.getRate()}"></td>
+      <td th:text="${history.getDate_from()}"></td>
+      <td th:text="${history.getDate_to()}"></td>
+      <td th:text="${history.getOperation_date()}"></td>
+      <td th:text="${history.getFrom_info()}"></td>
+      <td th:text="${history.getTo_info()}"></td>
+    </tr>
+<!--  <tr th:each="history : ${histories}">-->
+<!--    <td th:text="${history.u_id}"></td>-->
+<!--    <td th:text="${history.u_full_name}"></td>-->
+<!--    <td th:text="${history.u_email}"></td>-->
+<!--    <td th:text="${history.amount}"></td>-->
+<!--    <td th:text="${history.rate}"></td>-->
+<!--    <td th:text="${history.date_from}"></td>-->
+<!--    <td th:text="${history.date_to}"></td>-->
+<!--    <td th:text="${history.operation_date}"></td>-->
+<!--    <td th:text="${history.from_info}"></td>-->
+<!--    <td th:text="${history.to_info}"></td>-->
+<!--  </tr>-->
+  </tbody>
 </table>
 </body>
 </html>
