@@ -3,6 +3,7 @@ package app.controller;
 import app.api.currency_exchange.exchange_rates_api_io.eur_to_usd.EurToUsdResponse;
 import app.api.currency_exchange.exchange_rates_api_io.range_with_base.HistoricalRates;
 import app.entity.Currency;
+import app.exception.RateNotFoundException;
 import app.exception.WrongActionException;
 import app.service.CurrencyAPIService;
 import app.service.CurrencyService;
@@ -118,7 +119,11 @@ public class ExchangeAuthorizedController {
       log.info("range response end_date is " + usd.end_at);
       log.info("range response abc is " + usd.rates.toString());
 
-      double rate = usd.rates.get(fromDate)
+      LocalDate latestDate = usd.rates.keySet().stream().findFirst().orElseThrow(RateNotFoundException::new);
+
+      log.info("range response asdnbjkaskdnk is " + usd.rates.get(latestDate));
+
+      double rate = usd.rates.get(latestDate)
               .getAllCurrencyNamesAndValues()
               .entrySet()
               .stream()

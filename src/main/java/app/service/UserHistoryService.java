@@ -1,6 +1,6 @@
 package app.service;
 
-import app.entity.History;
+import app.entity.UserHistory;
 import app.repo.UserHistoryRelationRepo;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ public class UserHistoryService {
     this.U_H_REL_REPO = U_H_REL_REPO;
   }
 
-  public List<History> getHistories(long user_id) {
+  public List<UserHistory> getHistories(long user_id) {
     return U_H_REL_REPO.findAllHistories(user_id);
   }
 }

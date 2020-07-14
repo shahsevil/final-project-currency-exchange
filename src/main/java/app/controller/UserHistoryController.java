@@ -1,7 +1,7 @@
 package app.controller;
 
-import app.entity.History;
 import app.entity.User;
+import app.entity.UserHistory;
 import app.exception.HistoryNotFoundException;
 import app.exception.WrongActionException;
 import app.service.HistoryService;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,21 +36,16 @@ public class UserHistoryController {
    */
   @GetMapping
   public String handle_user_history_get(Model model) {
-    class HistoryResponse {
-
-    }
-
     log.info("GET -> /user-history");
 
     final long user_id = 1;
 
     Optional<User> user = USER_SERVICE.findUserById(user_id);
     if (user.isPresent()) {
-      List<History> histories = USER_HISTORY_SERVICE.getHistories(user_id);
+      List<UserHistory> histories = USER_HISTORY_SERVICE.getHistories(user_id);
       if (histories.size() > 0) {
-
-//      histories.stream().map(h -> h.getCurrencies())
-
+        log.info(histories);
+        model.addAttribute("histories", histories);
         return "user-history";
       } else throw new HistoryNotFoundException();
     } else throw new WrongActionException();

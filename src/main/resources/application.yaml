@@ -4,6 +4,9 @@ server:
 spring:
   main:
     banner-mode: console
+  devtools:
+    restart:
+      additional-paths: ./resources
 
   mail:
     host: smtp.google.com
@@ -17,9 +20,6 @@ spring:
             port: 465
             class: javax.net.ssl.SSLSocketFactory
             fallback: false
-
-
-
 
   datasource:
     url: jdbc:postgresql://ec2-176-34-123-50.eu-west-1.compute.amazonaws.com:5432/df3i5ah7chfpaq

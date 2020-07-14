@@ -1,6 +1,5 @@
 package app.controller;
 
-import app.api.currency_exchange.exchange_rates_api_io.latest_with_base.CurrencyList;
 import app.api.currency_exchange.exchange_rates_api_io.range_with_base.HistoricalRates;
 import app.entity.User;
 import app.exception.RateNotFoundException;
@@ -8,7 +7,6 @@ import app.exception.WrongActionException;
 import app.service.CurrencyAPIService;
 import app.service.CurrencyService;
 import app.service.UserService;
-import app.utils.MathUtils;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,19 +14,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static app.utils.MathUtils.*;
-import static app.utils.Util.getRateOrDefault;
+import static app.utils.Util.getOrDefaultRate;
 
 @Log4j2
 @Controller
@@ -120,7 +114,7 @@ public class RatesController {
                 .entrySet()
                 .stream()
                 .map(e -> {
-                  double rate = round_till(getRateOrDefault(e, toCurrency, 1d), 1000);
+                  double rate = round_till(getOrDefaultRate(e, toCurrency, 1d), 1000);
                   return new RateResponse(e.getKey(), fromCurrency, toCurrency, rate, round_till(1 / rate, 1000));
                 })
                 .sorted((r1, r2) -> -r1.date.compareTo(r2.date))
@@ -141,8 +135,8 @@ public class RatesController {
 
     if ("go_back".equals(btnGoBack)) {
       // TODO make logout here
-      log.info("Redirect -> /main-page-authorized-new");
-      return "redirect:/main-page-authorized-new";
+      log.info("Redirect -> /authorized");
+      return "redirect:/authorized";
     } throw new WrongActionException();
   }
 }
