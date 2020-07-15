@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -35,8 +36,15 @@ public class UserHistoryController {
    * http://localhost:8080/user-history
    */
   @GetMapping
-  public String handle_user_history_get(Model model) {
+  public String handle_user_history_get(@RequestParam(value = "go_back", required = false) String btnGoBack,
+                                        Model model) {
     log.info("GET -> /user-history");
+
+    if ("go_back".equals(btnGoBack)) {
+      // TODO make logout here
+      log.info("Redirect -> /authorized");
+      return "redirect:/authorized";
+    }
 
     final long user_id = 1;
 

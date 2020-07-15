@@ -43,14 +43,14 @@ public class ExHandler {
   public RedirectView handleWrongAction(Model model) {
     model.addAttribute("error", "wrong operation");
     log.warn("Smth went wrong");
-    return new RedirectView("./main-page-authorized-new");
+    return new RedirectView("./authorized");
   }
 
   @ExceptionHandler(HistoryNotFoundException.class)
   public RedirectView handleNoHistory(Model model) {
     model.addAttribute("error", "not found any histories");
     log.warn("Histories not found!");
-    return new RedirectView("./main-page-authorized-new");
+    return new RedirectView("./authorized");
   }
 
 

@@ -176,7 +176,6 @@ public class ExchangeAuthorizedController {
       log.info("Redirect -> /rates");
       return "redirect:/rates";
     } else if ("user_history".equals(btnUserHistory)) {
-      // TODO user history here
       log.info("Redirect -> /user-history");
       return "redirect:/user-history";
     } else throw new WrongActionException();
