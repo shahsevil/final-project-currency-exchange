@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar target/final-project-currency-exchange-1.0-SNAPSHOT.jar --port $PORT target/*.war
+web: java -jar target/final-project-currency-exchange-1.0-SNAPSHOT.jar
