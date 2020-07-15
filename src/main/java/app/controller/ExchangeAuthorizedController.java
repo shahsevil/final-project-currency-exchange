@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -83,7 +85,8 @@ public class ExchangeAuthorizedController {
                                      @RequestParam(value = "rate_history", required = false) String btnRateHistory,
                                      @RequestParam(value = "user_history", required = false) String btnUserHistory,
                                      Model model,
-                                     RedirectAttributes redirectAttributes) {
+                                     RedirectAttributes redirectAttributes,
+                                     HttpServletRequest httpServletRequest) {
 
     log.info("Calculate exchange -> main-page-authorized");
 
@@ -106,8 +109,10 @@ public class ExchangeAuthorizedController {
     log.info("toDate is " + toDate);
 
     if ("logout".equals(btnLogout)) {
-      // TODO make logout here
-      log.info("Redirect -> login");
+      HttpSession session = httpServletRequest.getSession();
+      session.removeAttribute("user_id");
+      session.invalidate();
+      log.info("Logout; Redirect -> /login");
       return "redirect:/login";
     } else if ("exchange".equals(btnExchange)) {
       HistoricalRates usd = CURRENCY_API_SERVICE.getRangeWithBase(fromDate, toDate, fromCurrency)
@@ -142,7 +147,7 @@ public class ExchangeAuthorizedController {
       log.info("==== from db ====");
 
       HISTORY_SERVICE.addHistory(enteredValue, fromDate, toDate,
-              fromCurrId, toCurrId, LocalDate.now(), rate, 1);
+              fromCurrId, toCurrId, LocalDate.now(), rate, (long) httpServletRequest.getSession().getAttribute("user_id"));
 
       List<Currency> currencies = CURRENCY_SERVICE.getAllCurrencies();
 

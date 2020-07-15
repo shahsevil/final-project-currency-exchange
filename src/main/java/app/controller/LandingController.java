@@ -4,6 +4,7 @@ import app.entity.User;
 import app.exception.WrongActionException;
 import app.service.UserService;
 import lombok.extern.log4j.Log4j2;
+import org.hibernate.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,9 +48,9 @@ public class LandingController {
                                     @RequestParam(value = "get_started", required = false) String getStarted,
                                     HttpServletRequest httpServletRequest) {
     if ("logout".equals(logout)) {
-      // TODO make logout here
       HttpSession session = httpServletRequest.getSession();
-      session.removeAttribute("");
+      session.removeAttribute("user_id");
+      session.invalidate();
       log.info("Logout; Redirect -> /login");
       return "redirect:/login";
     } else if ("get_started".equals(getStarted)) {
