@@ -3,11 +3,14 @@ package app.controller;
 import app.api.currency_exchange.exchange_rates_api_io.eur_to_usd.EurToUsdResponse;
 import app.api.currency_exchange.exchange_rates_api_io.range_with_base.HistoricalRates;
 import app.entity.Currency;
+import app.entity.User;
 import app.exception.RateNotFoundException;
+import app.exception.UserNotFoundException;
 import app.exception.WrongActionException;
 import app.service.CurrencyAPIService;
 import app.service.CurrencyService;
 import app.service.HistoryService;
+import app.service.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,18 +38,20 @@ public class ExchangeAuthorizedController {
   private final CurrencyAPIService CURRENCY_API_SERVICE;
   private final CurrencyService CURRENCY_SERVICE;
   private final HistoryService HISTORY_SERVICE;
+  private final UserService USER_SERVICE;
 
-  public ExchangeAuthorizedController(CurrencyAPIService currency_api_service, CurrencyService currency_service, HistoryService history_service) {
+  public ExchangeAuthorizedController(CurrencyAPIService currency_api_service, CurrencyService currency_service, HistoryService history_service, UserService USER_SERVICE) {
     CURRENCY_API_SERVICE = currency_api_service;
     CURRENCY_SERVICE = currency_service;
     HISTORY_SERVICE = history_service;
+    this.USER_SERVICE = USER_SERVICE;
   }
 
   /**
    * http://localhost:8080/authorized
    */
   @GetMapping
-  public String handle_exchanges_get(Model model) {
+  public String handle_exchanges_get(Model model, HttpServletRequest httpServletRequest) {
     log.info("GET -> /authorized");
 
     List<Currency> currencies = CURRENCY_SERVICE.getAllCurrencies();
@@ -63,7 +68,11 @@ public class ExchangeAuthorizedController {
 
       log.info("rate is : " + rate);
 
-      model.addAttribute("name_and_surname", "Elvin Taghizade");
+      long user_id = (long) httpServletRequest.getSession().getAttribute("user_id");
+
+      User user = USER_SERVICE.findUserById(user_id).orElseThrow(UserNotFoundException::new);
+
+      model.addAttribute("fullname", user.getFull_name());
       model.addAttribute("default_from_curr", "Please select a currency");
       model.addAttribute("default_to_curr", "Please select a currency");
       model.addAttribute("entered_value", 0);
