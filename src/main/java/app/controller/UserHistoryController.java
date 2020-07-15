@@ -43,7 +43,7 @@ public class UserHistoryController {
     if ("go_back".equals(btnGoBack)) {
       // TODO make logout here
       log.info("Redirect -> /authorized");
-      return "redirect:/authorized";
+      return "redirect:/landing";
     }
 
     final long user_id = 1;
