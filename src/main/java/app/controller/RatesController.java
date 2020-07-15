@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -48,14 +49,15 @@ public class RatesController {
                                      @RequestParam(value = "toCurrency", required = false) String toCurrency,
                                      @RequestParam(value = "fromDate", required = false) LocalDate fromDate,
                                      @RequestParam(value = "toDate", required = false) LocalDate toDate,
-                                     Model model) {
+                                     Model model,
+                                     HttpServletRequest httpServletRequest) {
 
     log.info("fromCurrency is " + fromCurrency);
     log.info("toCurrency is " + toCurrency);
     log.info("fromDate is " + fromDate);
     log.info("toDate is " + toDate);
 
-    final long user_id = 1;
+    final long user_id = (long) httpServletRequest.getSession().getAttribute("user_id");
 
     Optional<User> user = USER_SERVICE.findUserById(user_id);
 
@@ -137,6 +139,7 @@ public class RatesController {
       // TODO make logout here
       log.info("Redirect -> /authorized");
       return "redirect:/authorized";
-    } throw new WrongActionException();
+    }
+    throw new WrongActionException();
   }
 }

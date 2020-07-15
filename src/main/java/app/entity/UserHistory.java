@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Entity
 public class UserHistory {
   @Id
-  private long u_id;
+  private long h_id;
   private String u_full_name;
   private String u_email;
   private double amount;

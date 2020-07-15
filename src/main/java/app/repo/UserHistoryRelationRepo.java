@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface UserHistoryRelationRepo extends JpaRepository<UserHistory, Long> {
 
-  @Query(value = "SELECT DISTINCT u.u_id,\n" +
+  @Query(value = "SELECT DISTINCT h.h_id,\n" +
           "                u.u_full_name,\n" +
           "                u.u_email,\n" +
           "                h.amount,\n" +

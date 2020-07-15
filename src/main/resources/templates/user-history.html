@@ -23,33 +23,33 @@
   </tr>
   </thead>
   <tbody>
-  <tr th:each="history : ${histories}">
-    <td th:text="${history.getU_id()}"></td>
-    <td th:text="${history.getU_full_name()}"></td>
-    <td th:text="${history.getU_email()}"></td>
-    <td th:text="${history.getAmount()}"></td>
-    <td th:text="${history.getRate()}"></td>
-    <td th:text="${history.getDate_from()}"></td>
-    <td th:text="${history.getDate_to()}"></td>
-    <td th:text="${history.getOperation_date()}"></td>
-    <td th:text="${history.getFrom_info()}"></td>
-    <td th:text="${history.getTo_info()}"></td>
-  </tr>
   <!--  <tr th:each="history : ${histories}">-->
-  <!--    <td th:text="${history.u_id}"></td>-->
-  <!--    <td th:text="${history.u_full_name}"></td>-->
-  <!--    <td th:text="${history.u_email}"></td>-->
-  <!--    <td th:text="${history.amount}"></td>-->
-  <!--    <td th:text="${history.rate}"></td>-->
-  <!--    <td th:text="${history.date_from}"></td>-->
-  <!--    <td th:text="${history.date_to}"></td>-->
-  <!--    <td th:text="${history.operation_date}"></td>-->
-  <!--    <td th:text="${history.from_info}"></td>-->
-  <!--    <td th:text="${history.to_info}"></td>-->
+  <!--    <td th:text="${history.getU_id()}"></td>-->
+  <!--    <td th:text="${history.getU_full_name()}"></td>-->
+  <!--    <td th:text="${history.getU_email()}"></td>-->
+  <!--    <td th:text="${history.getAmount()}"></td>-->
+  <!--    <td th:text="${history.getRate()}"></td>-->
+  <!--    <td th:text="${history.getDate_from()}"></td>-->
+  <!--    <td th:text="${history.getDate_to()}"></td>-->
+  <!--    <td th:text="${history.getOperation_date()}"></td>-->
+  <!--    <td th:text="${history.getFrom_info()}"></td>-->
+  <!--    <td th:text="${history.getTo_info()}"></td>-->
   <!--  </tr>-->
+  <tr th:each="history : ${histories}">
+    <td th:text="${history.h_id}"></td>
+    <td th:text="${history.u_full_name}"></td>
+    <td th:text="${history.u_email}"></td>
+    <td th:text="${history.amount}"></td>
+    <td th:text="${history.rate}"></td>
+    <td th:text="${history.date_from}"></td>
+    <td th:text="${history.date_to}"></td>
+    <td th:text="${history.operation_date}"></td>
+    <td th:text="${history.from_info}"></td>
+    <td th:text="${history.to_info}"></td>
+  </tr>
   </tbody>
 </table>
-<div style="padding-left: 400px">
+<div style="padding-left: 500px">
   <form method="post">
     <button type="submit" name="go_back" value="go_back"
             class="reset-section-container-form-login">Go my account
