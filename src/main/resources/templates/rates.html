@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -11,7 +12,7 @@
 
 <body>
 <header class="main-header">
-  <a href="/main-page" class="main-header-logo">
+  <a href="./main-page" class="main-header-logo">
     <img src="./img/iba-tech-logo-white.svg" alt="IBA Tech Academy">
   </a>
   <div class="main-header-wrapper">
@@ -20,7 +21,9 @@
         <span class="main-header-username" th:text="${full_name}"></span>
         <div class="log-out-block">
           <img src="./img/log-out-icon.svg" alt="Log out">
-          <a href="login.html" class="log-out-btn">Log out</a>
+          <button name="logout" value="logout" style="background: none; border: none;">
+            <span class="log-out-block"><a th:href="@{/logout}">Log out</a></span>
+          </button>
         </div>
       </div>
       <img class="main-header-user-icon" src="./img/user-icon-with-background.svg" alt="User Icon">
@@ -43,7 +46,7 @@
 
     <form method="post">
       <button type="submit" name="go_back" value="go_back"
-              class="reset-section-container-form-login">Go Back
+              class="reset-section-container-form-login"><a href ="/authorized">Go Back</a>
       </button>
     </form>
   </div>

@@ -16,8 +16,8 @@ public class UserHistoryService {
     this.U_H_REL_REPO = U_H_REL_REPO;
   }
 
-  public List<UserHistory> getHistories(long user_id) {
-    List<UserHistory> allHistories = U_H_REL_REPO.findAllHistories(user_id);
+  public List<UserHistory> getHistories(long id) {
+    List<UserHistory> allHistories = U_H_REL_REPO.findAllHistories(id);
     log.info(allHistories);
     return allHistories;
   }

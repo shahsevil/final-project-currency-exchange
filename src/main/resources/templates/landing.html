@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -18,11 +19,11 @@
     <div class="main-header-wrapper">
       <div class="main-header-profile-wrapper">
         <div class="main-header-profile-credentials">
-          <span class="main-header-username" th:text="${full_name}"></span>
+          <span class="main-header-username" th:text="${username}"></span>
           <div class="log-out-block">
             <img src="./img/log-out-icon.svg" alt="Log out">
             <button name="logout" value="logout" style="background: none; border: none;">
-              <span class="log-out-block">Log out</span>
+              <span class="log-out-block"><a th:href="@{/logout}">Log out</a></span>
             </button>
           </div>
         </div>
@@ -32,8 +33,8 @@
   </header>
   <main class="short-url-container">
     <div class="short-url-content">
-      <h2 class="short-url-title">Hello, <span th:text="${full_name}"></span></h2>
-      <button class="short-url-btn" name="get_started" value="get_started" type="submit">Get Started</button>
+      <h2 class="short-url-title">Hello, <span th:text="${username}"></span></h2>
+      <button class="short-url-btn" name="get_started" value="get_started" type="submit"><a href="/authorized">Get Started</a></button>
     </div>
     <div>
       <img src="./img/landing-background.svg" class="short-url-img" alt="landing-background">
