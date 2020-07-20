@@ -4,15 +4,19 @@ import app.entity.User;
 import app.entity.UserHistory;
 import app.exception.HistoryNotFoundException;
 import app.exception.WrongActionException;
+import app.security.XUserDetails;
 import app.service.HistoryService;
 import app.service.UserHistoryService;
 import app.service.UserService;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,14 +38,14 @@ public class UserHistoryController {
    * http://localhost:8080/user-history
    */
   @GetMapping
-  public String handle_user_history_get(Model model, HttpServletRequest httpServletRequest) {
+  public String handle_user_history_get1(Model model, Authentication authentication) {
     log.info("GET -> /user-history");
 
-    final long user_id = (long) httpServletRequest.getSession().getAttribute("user_id");
+    XUserDetails xUser = (XUserDetails) authentication.getPrincipal();
 
-    Optional<User> user = USER_SERVICE.findUserById(user_id);
+    Optional<User> user = USER_SERVICE.findUserById(xUser.getId());
     if (user.isPresent()) {
-      List<UserHistory> histories = USER_HISTORY_SERVICE.getHistories(user_id);
+      List<UserHistory> histories = USER_HISTORY_SERVICE.getHistories(xUser.getId());
       if (histories.size() > 0) {
         log.info(histories);
         model.addAttribute("histories", histories);
@@ -54,7 +58,6 @@ public class UserHistoryController {
   public String handle_user_history_post(@RequestParam(value = "go_back", required = false) String btnGoBack) {
     log.info("btnGoBack is " + btnGoBack);
     if ("go_back".equals(btnGoBack)) {
-      // TODO make logout here
       log.info("Redirect -> /authorized");
       return "redirect:/authorized";
     }

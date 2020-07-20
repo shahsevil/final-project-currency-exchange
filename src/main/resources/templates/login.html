@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Currency Exchange: Login</title>
@@ -20,7 +21,9 @@
         <p class="login-section-container-description">To keep connected with us please login with personal information
           by
           email address and password</p>
-        <form method="post" class="login-section-container-form">
+        <p th:if="${error}" class="error" style="color: red; font-size: 20px;">
+
+        <form method="post" class="login-section-container-form" action="/login">
           <div class="login-section-container-form-input-wrapper">
             <img src="./img/mail-icon.svg" alt="User Icon">
             <label for="email"></label>
@@ -43,7 +46,7 @@
             <a href="./forgot-password" class="login-section-container-options-link">Forgot password?</a>
           </div>
           <div class="login-section-form-buttons">
-            <button class="login-section-container-form-login" type="submit" name="login" value="login">Login now
+            <button class="login-section-container-form-login" type="submit" value="login">Login now
             </button>
             <a href="./registration" class="login-section-container-form-signup" type="submit">Create account</a>
           </div>

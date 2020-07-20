@@ -4,10 +4,12 @@ import app.api.currency_exchange.exchange_rates_api_io.range_with_base.Historica
 import app.entity.User;
 import app.exception.RateNotFoundException;
 import app.exception.WrongActionException;
+import app.security.XUserDetails;
 import app.service.CurrencyAPIService;
 import app.service.CurrencyService;
 import app.service.UserService;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,14 +17,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static app.utils.MathUtils.*;
+import static app.utils.MathUtils.round_till;
 import static app.utils.Util.getOrDefaultRate;
 
 @Log4j2
@@ -50,16 +51,16 @@ public class RatesController {
                                      @RequestParam(value = "fromDate", required = false) LocalDate fromDate,
                                      @RequestParam(value = "toDate", required = false) LocalDate toDate,
                                      Model model,
-                                     HttpServletRequest httpServletRequest) {
+                                     Authentication authentication) {
 
     log.info("fromCurrency is " + fromCurrency);
     log.info("toCurrency is " + toCurrency);
     log.info("fromDate is " + fromDate);
     log.info("toDate is " + toDate);
 
-    final long user_id = (long) httpServletRequest.getSession().getAttribute("user_id");
 
-    Optional<User> user = USER_SERVICE.findUserById(user_id);
+    XUserDetails xUser = (XUserDetails) authentication.getPrincipal();
+    Optional<User> user = USER_SERVICE.findUserById(xUser.getId());
 
     if (user.isPresent()) {
 

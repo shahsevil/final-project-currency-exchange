@@ -22,10 +22,10 @@ public class HistoryService {
 
   public void addHistory(double amount, LocalDate fromDate,
                          LocalDate toDate, long fromCurrId, long toCurrId,
-                         LocalDate operationDate, double rate, long userId) {
+                         LocalDate operationDate, double rate, long id) {
 
     History history = new History(fromCurrId, toCurrId, fromDate, toDate, operationDate, rate, amount,
-            Arrays.asList(new Currency(fromCurrId), new Currency(toCurrId)), new User(userId));
+            Arrays.asList(new Currency(fromCurrId), new Currency(toCurrId)), new User(id));
 
     log.info("history is : " + history);
 

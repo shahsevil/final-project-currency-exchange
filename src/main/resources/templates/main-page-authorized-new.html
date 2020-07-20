@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -22,8 +23,8 @@
         <form method="post">
           <div class="log-out-block">
             <img src="./img/log-out-icon.svg" alt="Log out">
-            <button name="logout" value="logout" class="" style="background: none; border: none;">
-              <span class="log-out-block">Log out</span>
+            <button name="logout" value="logout" style="background: none; border: none;">
+              <span class="log-out-block"><a th:href="@{/logout}">Log out</a></span>
             </button>
           </div>
         </form>
