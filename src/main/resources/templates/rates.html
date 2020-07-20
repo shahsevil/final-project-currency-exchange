@@ -21,9 +21,7 @@
         <span class="main-header-username" th:text="${full_name}"></span>
         <div class="log-out-block">
           <img src="./img/log-out-icon.svg" alt="Log out">
-          <button name="logout" value="logout" style="background: none; border: none;">
-            <span class="log-out-block"><a th:href="@{/logout}">Log out</a></span>
-          </button>
+          <a th:href="@{/logout}" class="log-out-btn">Log out</a>
         </div>
       </div>
       <img class="main-header-user-icon" src="./img/user-icon-with-background.svg" alt="User Icon">
@@ -46,7 +44,7 @@
 
     <form method="post">
       <button type="submit" name="go_back" value="go_back"
-              class="reset-section-container-form-login"><a href ="/authorized">Go Back</a>
+              class="reset-section-container-form-login">Go Back</a>
       </button>
     </form>
   </div>
