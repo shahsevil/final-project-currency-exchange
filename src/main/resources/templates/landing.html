@@ -22,9 +22,7 @@
           <span class="main-header-username" th:text="${username}"></span>
           <div class="log-out-block">
             <img src="./img/log-out-icon.svg" alt="Log out">
-            <button name="logout" value="logout" style="background: none; border: none;">
-              <span class="log-out-block"><a th:href="@{/logout}">Log out</a></span>
-            </button>
+            <a th:href="@{/logout}" class="log-out-btn">Log out</a>
           </div>
         </div>
         <img class="main-header-user-icon" src="./img/user-icon-with-background.svg" alt="User Icon">
@@ -34,7 +32,7 @@
   <main class="short-url-container">
     <div class="short-url-content">
       <h2 class="short-url-title">Hello, <span th:text="${username}"></span></h2>
-      <button class="short-url-btn" name="get_started" value="get_started" type="submit"><a href="/authorized">Get Started</a></button>
+      <button class="short-url-btn" name="get_started" value="get_started" type="submit">Get Started</button>
     </div>
     <div>
       <img src="./img/landing-background.svg" class="short-url-img" alt="landing-background">
