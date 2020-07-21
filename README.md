@@ -34,4 +34,4 @@ These variables should be entered from Environment variables:
 
 ## Test user’s credentials:
 - Email: test@test.com
-- Password: Qwerty123
+- Password: tester123456
