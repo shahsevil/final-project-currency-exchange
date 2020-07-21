@@ -21,6 +21,6 @@ public class LoginController {
     public String errorLoginHandler(Model model) {
         model.addAttribute("error", true);
         log.info("Incorrect password or login");
-        return "forward:/error";
+        return "redirect:/error";
     }
 }
