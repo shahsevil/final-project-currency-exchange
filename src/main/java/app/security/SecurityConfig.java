@@ -15,14 +15,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.
                 csrf().disable().authorizeRequests()
-                .antMatchers("/","/registration","/forgot-password","/css/**", "/img/**", "/js/**").permitAll()
+                .antMatchers("/","/registration", "/error", "/forgot-password","/css/**", "/img/**", "/js/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .failureForwardUrl("/error")
+                .failureUrl("/error")
                 .defaultSuccessUrl("/landing",true).permitAll()
                 .and()
                 .rememberMe()
