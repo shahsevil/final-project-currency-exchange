@@ -1,0 +1,43 @@
+body
+{
+	background-color:#daebd6; 
+}
+div
+{
+	width: 361px;
+	height: 500px;
+	background-image: linear-gradient(to right, lightblue , #daebd6);
+	margin-left: 12%;
+	margin-top: 65px;
+	padding:50px;
+	float: left;
+	z-index: 1;
+}
+h1
+{
+	font-size: 55px;
+	font-family: Arial black, serif;
+}
+h3
+{
+	font-size: 35px;
+}
+a
+{
+	text-decoration: none;
+	color:black;
+
+}
+button
+{
+	background-color: #01a89e !important;
+	border: 0 !important; 
+}
+img 
+{
+	margin-top:100px;
+	float: left;
+	width:820px; 
+	height:350px;
+	z-index: 0;
+}

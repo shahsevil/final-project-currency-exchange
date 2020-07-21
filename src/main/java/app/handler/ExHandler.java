@@ -15,7 +15,7 @@ public class ExHandler {
   public RedirectView handleUserNotFound(Model model) {
     model.addAttribute("error", "User not found");
     log.warn("User not found");
-    return new RedirectView("./login");
+    return new RedirectView("./error");
   }
 
   @ExceptionHandler(DuplicateEmailAddressException.class)
@@ -36,21 +36,21 @@ public class ExHandler {
   public RedirectView handleNoRate(Model model) {
     model.addAttribute("error", "rate_not_found");
     log.warn("Rate not found");
-    return new RedirectView("./main-page-new");
+    return new RedirectView("./error");
   }
 
   @ExceptionHandler(WrongActionException.class)
   public RedirectView handleWrongAction(Model model) {
     model.addAttribute("error", "wrong operation");
     log.warn("Smth went wrong");
-    return new RedirectView("./authorized");
+    return new RedirectView("./error");
   }
 
   @ExceptionHandler(HistoryNotFoundException.class)
   public RedirectView handleNoHistory(Model model) {
     model.addAttribute("error", "not found any histories");
     log.warn("Histories not found!");
-    return new RedirectView("./authorized");
+    return new RedirectView("./error");
   }
 
 
