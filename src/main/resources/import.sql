@@ -8,4 +8,3 @@ insert into currency (curr_name_abv, curr_name_long, curr_symbol) VALUES ('CNY',
 insert into currency (curr_name_abv, curr_name_long, curr_symbol) VALUES ('PHP','Philippine Peso','₱');
 insert into currency (curr_name_abv, curr_name_long, curr_symbol) VALUES ('GBP','British Pound Sterling','£');
 insert into currency (curr_name_abv, curr_name_long, curr_symbol) VALUES ('RUB','Russian Ruble','RUB');
-INSERT INTO users (u_email, u_full_name, password) VALUES ('test@test.com', 'Test', 'tester123456');
