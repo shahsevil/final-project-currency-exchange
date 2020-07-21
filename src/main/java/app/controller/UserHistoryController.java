@@ -49,6 +49,7 @@ public class UserHistoryController {
       if (histories.size() > 0) {
         log.info(histories);
         model.addAttribute("histories", histories);
+
         return "user-history";
       } else throw new HistoryNotFoundException();
     } else throw new WrongActionException();
