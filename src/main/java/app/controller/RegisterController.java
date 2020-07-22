@@ -31,7 +31,7 @@ public class RegisterController {
     public String handle_register_post(FormReg formReg) {
         log.info("POST -> /registration");
         USER_SERVICE.registerUser(formReg);
-        return "/login";
+        return "redirect:/login";
     }
 
 }
