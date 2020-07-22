@@ -21,10 +21,11 @@ These variables should be entered from Environment variables:
 
 ## Built with:
 -	`Spring Boot`
+-   `Spring Security`
 -	`Spring Data`
--	`Hibernate JPA`
+-	`Hibernate - JPA`
 -	`Database - PostgreSQL`
--	`HTML5, CSS3, JavaScript6, *Thymeleaf`
+-	`HTML5, CSS3, *Thymeleaf`
 -	`API which was published by European Central Bank (https://exchangeratesapi.io/)`
 
 
