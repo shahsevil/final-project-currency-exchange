@@ -6,7 +6,7 @@ import app.entity.Currency;
 import app.entity.User;
 import app.exception.RateNotFoundException;
 import app.exception.UserNotFoundException;
-import app.exception.WrongActionException;
+import app.exception.ServiceUnavailable;
 import app.security.XUserDetails;
 import app.service.CurrencyAPIService;
 import app.service.CurrencyService;
@@ -79,8 +79,11 @@ public class ExchangeAuthorizedController {
       model.addAttribute("exchange_result", 0);
       model.addAttribute("from_to", String.format("1USD/%sEUR", round_till(1 / rate, 10000)));
       model.addAttribute("to_from", String.format("1EUR/%sUSD", round_till(rate, 10000)));
+      return "main-page-authorized-new";
+    } else {
+      log.warn("There is a problem while getting latest rates!");
+      throw new ServiceUnavailable();
     }
-    return "main-page-authorized-new";
   }
 
   @PostMapping
@@ -118,26 +121,28 @@ public class ExchangeAuthorizedController {
 
     if ("exchange".equals(btnExchange)) {
       HistoricalRates usd = CURRENCY_API_SERVICE.getRangeWithBase(fromDate, toDate, fromCurrency)
-              .orElseThrow(RuntimeException::new);
+              .orElseThrow(RateNotFoundException::new);
 
       log.info("range response is " + usd);
       log.info("range response base is " + usd.base);
       log.info("range response start_date is " + usd.start_at);
       log.info("range response end_date is " + usd.end_at);
-      log.info("range response abc is " + usd.rates.toString());
+      log.info("range response rates are " + usd.rates.toString());
 
       LocalDate latestDate = usd.rates.keySet().stream().findFirst().orElseThrow(RateNotFoundException::new);
 
-      log.info("range response asdnbjkaskdnk is " + usd.rates.get(latestDate));
+      log.info("range response rate is " + usd.rates.get(latestDate));
 
-      double rate = usd.rates.get(latestDate)
+      double rate;
+      if ("EUR".equals(fromCurrency) && "EUR".equals(toCurrency)) rate = 1d;
+      else rate = usd.rates.get(latestDate)
               .getAllCurrencyNamesAndValues()
               .entrySet()
               .stream()
               .filter(e -> e.getKey().equals(toCurrency))
               .map(Map.Entry::getValue)
               .findFirst()
-              .orElse(1D);
+              .orElse(1d);
 
       long fromCurrId = CURRENCY_SERVICE.getCurrId(fromCurrency);
       long toCurrId = CURRENCY_SERVICE.getCurrId(toCurrency);
@@ -172,6 +177,6 @@ public class ExchangeAuthorizedController {
     } else if ("user_history".equals(btnUserHistory)) {
       log.info("Redirect -> /user-history");
       return "redirect:/user-history";
-    } else throw new WrongActionException();
+    } else throw new ServiceUnavailable();
   }
 }

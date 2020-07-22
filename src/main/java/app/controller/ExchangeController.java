@@ -4,6 +4,7 @@ import app.api.currency_exchange.exchange_rates_api_io.eur_to_usd.EurToUsdRespon
 import app.api.currency_exchange.exchange_rates_api_io.latest_with_base.LatestBaseResponse;
 import app.entity.Currency;
 import app.exception.RateNotFoundException;
+import app.exception.ServiceUnavailable;
 import app.service.CurrencyAPIService;
 import app.service.CurrencyService;
 import lombok.extern.log4j.Log4j2;
@@ -45,14 +46,13 @@ public class ExchangeController {
     Optional<EurToUsdResponse> eurToUsd = CURRENCY_API_SERVICE.getLatestEurUSD();
 
     if (eurToUsd.isPresent()) {
+      final double rate = eurToUsd.get().rates.USD;
+
       log.info("date is " + eurToUsd.get().date);
       log.info("base is " + eurToUsd.get().base);
       log.info("rates are " + eurToUsd.get().rates);
-      log.info(eurToUsd.get().rates.USD);
-
-      final double rate = eurToUsd.get().rates.USD;
-
       log.info("rate is : " + rate);
+      log.info(eurToUsd.get().rates.USD);
 
       model.addAttribute("default_from_curr", "Please select a currency");
       model.addAttribute("default_to_curr", "Please select a currency");
@@ -60,8 +60,11 @@ public class ExchangeController {
       model.addAttribute("exchange_result", 0);
       model.addAttribute("from_to", String.format("1USD/%sEUR", round_till(1 / rate, 10000)));
       model.addAttribute("to_from", String.format("1EUR/%sUSD", round_till(rate, 10000)));
+      return "main-page-new";
+    } else {
+      log.warn("There is a problem while getting latest rates!");
+      throw new ServiceUnavailable();
     }
-    return "main-page-new";
   }
 
   @PostMapping
@@ -82,7 +85,6 @@ public class ExchangeController {
     }
 
     log.info("Calculate exchange -> main-page");
-
     log.info("fromCurrency is " + fromCurr);
     log.info("toCurrency is " + toCurr);
     log.info("enteredValue is " + fromValue);
@@ -98,7 +100,9 @@ public class ExchangeController {
     Optional<LatestBaseResponse> rates = CURRENCY_API_SERVICE.getLatestRatesWithBase(fromCurrency);
 
     if (rates.isPresent()) {
-      double rate = rates.get().rates.getAllCurrencyNamesAndValues()
+      double rate;
+      if ("EUR".equals(fromCurrency) && "EUR".equals(toCurrency)) rate = 1d;
+      else rate = rates.get().rates.getAllCurrencyNamesAndValues()
               .entrySet().stream()
               .filter(e -> e.getKey().equals(toCurrency))
               .map(Map.Entry::getValue)
@@ -114,7 +118,7 @@ public class ExchangeController {
       model.addAttribute("exchange_result", round_till(enteredValue * rate, 1000));
       model.addAttribute("from_to", String.format("1%s/%s%s", toCurrency, round_till(1 / rate, 1000), fromCurrency));
       model.addAttribute("to_from", String.format("1%s/%s%s", fromCurrency, round_till(rate, 1000), toCurrency));
+      return "main-page-new";
     } else throw new RateNotFoundException();
-    return "main-page-new";
   }
 }

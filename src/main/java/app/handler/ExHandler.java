@@ -1,29 +1,33 @@
-package app.handler;
-
-import app.exception.*;
-import lombok.extern.log4j.Log4j2;
-import org.springframework.boot.web.servlet.error.ErrorController;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.view.RedirectView;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpServletRequest;
-
-@Log4j2
-@Controller
-@ControllerAdvice
-public class ExHandler implements ErrorController {
+//package app.handler;
+//
+//import app.exception.*;
+//import lombok.extern.log4j.Log4j2;
+//import org.springframework.boot.web.servlet.error.ErrorController;
+//import org.springframework.http.HttpRequest;
+//import org.springframework.http.HttpStatus;
+//import org.springframework.http.ResponseEntity;
+//import org.springframework.stereotype.Controller;
+//import org.springframework.ui.Model;
+//import org.springframework.web.bind.annotation.ControllerAdvice;
+//import org.springframework.web.bind.annotation.ExceptionHandler;
+//import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.web.servlet.view.RedirectView;
+//
+//import javax.servlet.RequestDispatcher;
+//import javax.servlet.http.HttpServletRequest;
+//import java.net.http.HttpResponse;
+//
+//@Log4j2
+//@Controller
+//@ControllerAdvice
+//public class ExHandler implements ErrorController {
 //
 //  @ExceptionHandler(UserNotFoundException.class)
-//  public RedirectView handleUserNotFound(Model model) {
+//  public ResponseEntity<?> handleUserNotFound(Model model) {
 //    model.addAttribute("error", "User not found");
 //    log.warn("User not found");
-//    return new RedirectView("./error");
+////    return new RedirectView("./error");
+//    return new ResponseEntity<>("error-404", HttpStatus.NOT_FOUND);
 //  }
 //
 //  @ExceptionHandler(DuplicateEmailAddressException.class)
@@ -55,53 +59,54 @@ public class ExHandler implements ErrorController {
 //  }
 //
 //  @ExceptionHandler(HistoryNotFoundException.class)
-//  public RedirectView handleNoHistory(Model model) {
+//  public ResponseEntity<?> handleNoHistory(Model model) {
 //    model.addAttribute("error", "not found any histories");
 //    log.warn("Histories not found!");
-//    return new RedirectView("./error");
+////    return new RedirectView("./error");
+//    return new ResponseEntity<>("error-404", HttpStatus.NOT_FOUND);
 //  }
-
-
-  @GetMapping("/error")
-  @ExceptionHandler(value = {CurrencyNotFoundException.class,
-          DuplicateEmailAddressException.class,
-          HistoryNotFoundException.class,
-          InvalidTokenEx.class,
-          PasswordDoesntMatchException.class,
-          RateNotFoundException.class,
-          ResetEmptyEx.class,
-          UserNotFoundException.class,
-          WrongActionException.class,
-          RuntimeException.class
-  })
-  public String handleError(HttpServletRequest rq) {
-    Object status = rq.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
-    if (status != null) {
-      int code = Integer.parseInt(status.toString());
-      if (code == HttpStatus.NOT_FOUND.value()) {
-        log.error("ERROR -> 404");
-        return "error-404";
-      }
-      else if (code == HttpStatus.FORBIDDEN.value()) {
-        log.error("ERROR -> 403");
-        return "error-403";
-      }
-      else if (code == HttpStatus.INTERNAL_SERVER_ERROR.value()){
-        log.error("ERROR -> 500");
-        return "error-500";
-      }
-      else if (code == HttpStatus.FOUND.value()){
-        log.warn("ERROR -> 302");
-        return "error-302";
-      }
-        log.error("ERROR -> "+ status);
-    }
-    log.error("ERROR -> "+ status);
-    return "errors";
-  }
-
-  @Override
-  public String getErrorPath() {
-    return "/error";
-  }
-}
+//
+//
+////  @GetMapping("/error")
+////  @ExceptionHandler(value = {CurrencyNotFoundException.class,
+////          DuplicateEmailAddressException.class,
+////          HistoryNotFoundException.class,
+////          InvalidTokenEx.class,
+////          PasswordDoesntMatchException.class,
+////          RateNotFoundException.class,
+////          ResetEmptyEx.class,
+////          UserNotFoundException.class,
+////          WrongActionException.class,
+////          RuntimeException.class
+////  })
+////  public String handleError(HttpServletRequest rq) {
+////    Object status = rq.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
+////    if (status != null) {
+////      int code = Integer.parseInt(status.toString());
+////      if (code == HttpStatus.NOT_FOUND.value()) {
+////        log.error("ERROR -> 404");
+////        return "error-404";
+////      }
+////      else if (code == HttpStatus.FORBIDDEN.value()) {
+////        log.error("ERROR -> 403");
+////        return "error-403";
+////      }
+////      else if (code == HttpStatus.INTERNAL_SERVER_ERROR.value()){
+////        log.error("ERROR -> 500");
+////        return "error-500";
+////      }
+////      else if (code == HttpStatus.FOUND.value()){
+////        log.warn("ERROR -> 302");
+////        return "error-302";
+////      }
+////        log.error("ERROR -> "+ status);
+////    }
+////    log.error("ERROR -> exit -> "+ status);
+////    return "errors";
+////  }
+////
+//  @Override
+//  public String getErrorPath() {
+//    return "/error";
+//  }
+//}

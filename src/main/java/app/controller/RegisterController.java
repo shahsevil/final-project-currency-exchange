@@ -27,11 +27,11 @@ public class RegisterController {
         return "registration";
     }
 
-    //+++
     @PostMapping
     public String handle_register_post(FormReg formReg) {
         log.info("POST -> /registration");
-        return USER_SERVICE.registerUser(formReg) ? "login" : "registration";
+        USER_SERVICE.registerUser(formReg);
+        return "/login";
     }
 
 }

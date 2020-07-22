@@ -1,6 +1,6 @@
 package app.controller;
 
-import app.exception.WrongActionException;
+import app.exception.ServiceUnavailable;
 import app.security.XUserDetails;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.Authentication;
@@ -16,21 +16,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/landing")
 public class LandingController {
 
-    @GetMapping
-    public String handle_landing_get(Model model, Authentication authentication) {
-        log.info("GET -> /landing");
-        XUserDetails user = (XUserDetails) authentication.getPrincipal();
-        model.addAttribute("username", user.getUsername());
-        return "landing";
-    }
+  @GetMapping
+  public String handle_landing_get(Model model, Authentication authentication) {
+    log.info("GET -> /landing");
+    XUserDetails user = (XUserDetails) authentication.getPrincipal();
+    model.addAttribute("username", user.getUsername());
+    return "landing";
+  }
 
-    @PostMapping
-    public String handle_landing_post(@RequestParam(value = "get_started", required = false) String btn){
-        if ("get_started".equals(btn)) {
-            log.info("Redirect -> /authorized");
-            return "redirect:/authorized";
-        }
-        throw new WrongActionException();
+  @PostMapping
+  public String handle_landing_post(@RequestParam(value = "get_started", required = false) String btn) {
+    if ("get_started".equals(btn)) {
+      log.info("Redirect -> /authorized");
+      return "redirect:/authorized";
     }
+    throw new ServiceUnavailable();
+  }
 
 }

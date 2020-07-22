@@ -1,6 +1,7 @@
 package app.service;
 
 import app.entity.User;
+import app.exception.DuplicateEmailAddressException;
 import app.exception.PasswordDoesntMatchException;
 import app.exception.ResetEmptyEx;
 import app.form.FormReg;
@@ -30,15 +31,26 @@ public class UserService {
         return USER_REPO.findUserByEmailAndPassword(userName, password);
     }
 
-    public boolean registerUser(FormReg formReg) {
-        if (formReg.getPassword().equals(formReg.getConfirmPassword()) && !findUserByEmail(formReg.getEmail()).isPresent()) {
-            User user = new User(formReg.getFull_name(), formReg.getEmail(), formReg.getPassword());
-            User builded = user.builder().full_name(user.getFull_name()).email(user.getEmail()).password(PASSWORD_ENC.encode(user.getPassword())).build();
-            USER_REPO.save(builded);
-            log.info("New user successfully registered!");
-            return true;
+//    public boolean registerUser2(FormReg formReg) {
+//        if (formReg.getPassword().equals(formReg.getConfirmPassword()) && !findUserByEmail(formReg.getEmail()).isPresent()) {
+//            User user = new User(formReg.getFull_name(), formReg.getEmail(), formReg.getPassword());
+//            User built = User.builder().full_name(user.getFull_name()).email(user.getEmail()).password(PASSWORD_ENC.encode(user.getPassword())).build();
+//            USER_REPO.save(built);
+//            log.info("New user successfully registered!");
+//            return true;
+//        }
+//        return false;
+//    }
+
+    public void registerUser(FormReg formReg) {
+        if (!formReg.getPassword().equals(formReg.getConfirmPassword())) throw new PasswordDoesntMatchException();
+        else if (findUserByEmail(formReg.getEmail()).isPresent()) throw new DuplicateEmailAddressException();
+        else {
+          User user = new User(formReg.getFull_name(), formReg.getEmail(), formReg.getPassword());
+          User built = User.builder().full_name(user.getFull_name()).email(user.getEmail()).password(PASSWORD_ENC.encode(user.getPassword())).build();
+          USER_REPO.save(built);
+          log.info("New user successfully registered!");
         }
-        return false;
     }
 
     public boolean updatePassword(String email, String password, String confirmpassword) {

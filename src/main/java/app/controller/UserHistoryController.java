@@ -3,7 +3,7 @@ package app.controller;
 import app.entity.User;
 import app.entity.UserHistory;
 import app.exception.HistoryNotFoundException;
-import app.exception.WrongActionException;
+import app.exception.ServiceUnavailable;
 import app.security.XUserDetails;
 import app.service.HistoryService;
 import app.service.UserHistoryService;
@@ -52,7 +52,7 @@ public class UserHistoryController {
 
         return "user-history";
       } else throw new HistoryNotFoundException();
-    } else throw new WrongActionException();
+    } else throw new ServiceUnavailable();
   }
 
   @PostMapping
@@ -62,6 +62,6 @@ public class UserHistoryController {
       log.info("Redirect -> /authorized");
       return "redirect:/authorized";
     }
-    throw new WrongActionException();
+    throw new ServiceUnavailable();
   }
 }

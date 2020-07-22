@@ -3,7 +3,7 @@ package app.controller;
 import app.api.currency_exchange.exchange_rates_api_io.range_with_base.HistoricalRates;
 import app.entity.User;
 import app.exception.RateNotFoundException;
-import app.exception.WrongActionException;
+import app.exception.ServiceUnavailable;
 import app.security.XUserDetails;
 import app.service.CurrencyAPIService;
 import app.service.CurrencyService;
@@ -26,6 +26,10 @@ import java.util.stream.Collectors;
 import static app.utils.MathUtils.round_till;
 import static app.utils.Util.getOrDefaultRate;
 
+/**
+ * http://localhost:8080/rates
+ */
+
 @Log4j2
 @Controller
 @RequestMapping("/rates")
@@ -42,9 +46,6 @@ public class RatesController {
     this.USER_SERVICE = USER_SERVICE;
   }
 
-  /**
-   * http://localhost:8080/rates
-   */
   @GetMapping
   public String handle_exchanges_get(@RequestParam(value = "fromCurrency", required = false) String fromCurrency,
                                      @RequestParam(value = "toCurrency", required = false) String toCurrency,
@@ -129,7 +130,7 @@ public class RatesController {
         model.addAttribute("to_date", toDate.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy")));
         return "rates";
       } else throw new RateNotFoundException();
-    } else throw new WrongActionException();
+    } else throw new ServiceUnavailable();
   }
 
   @PostMapping
@@ -137,10 +138,8 @@ public class RatesController {
     log.info("btnGoBack is " + btnGoBack);
 
     if ("go_back".equals(btnGoBack)) {
-      // TODO make logout here
       log.info("Redirect -> /authorized");
       return "redirect:/authorized";
-    }
-    throw new WrongActionException();
+    } else throw new ServiceUnavailable();
   }
 }
