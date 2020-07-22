@@ -30,6 +30,6 @@ public interface UserHistoryRelationRepo extends JpaRepository<UserHistory, Long
           "         inner join r_c_h rch on h.h_id = rch.history_id\n" +
           "         inner join currency fromC on h.curr_from_id = fromC.curr_id\n" +
           "         inner join currency toC on h.curr_to_id = toC.curr_id \n" +
-          "where user_id = (?1);", nativeQuery = true)
+          "where user_id = (?1) order by h.h_id asc;", nativeQuery = true)
   List<UserHistory> findAllHistories(long id);
 }
