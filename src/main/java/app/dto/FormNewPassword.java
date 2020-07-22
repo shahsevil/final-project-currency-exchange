@@ -1,4 +1,4 @@
-package app.form;
+package app.dto;
 
 import lombok.Data;
 

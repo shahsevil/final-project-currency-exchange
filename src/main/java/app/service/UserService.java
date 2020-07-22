@@ -4,7 +4,7 @@ import app.entity.User;
 import app.exception.DuplicateEmailAddressException;
 import app.exception.PasswordDoesntMatchException;
 import app.exception.ResetEmptyEx;
-import app.form.FormReg;
+import app.dto.FormReg;
 import app.repo.UserRepo;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.crypto.password.PasswordEncoder;
