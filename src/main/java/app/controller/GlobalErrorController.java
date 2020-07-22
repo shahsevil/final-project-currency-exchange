@@ -19,21 +19,17 @@ public class GlobalErrorController implements ErrorController {
       int code = Integer.parseInt(status.toString());
       switch (code) {
         case 302:
-          log.error("ERROR -> 302");
           return "error-302";
         case 400:
-          log.error("ERROR -> 400");
           return "error-400";
         case 401:
-          log.error("ERROR -> 401");
           return "error-401";
         case 403:
-          log.error("ERROR -> 403");
           return "error-403";
         case 404:
-          log.error("ERROR -> 404");
           return "error-404";
       }
+      log.error("ERROR -> " + code);
     }
     log.error("ERROR -> 500");
     return "error-500";
