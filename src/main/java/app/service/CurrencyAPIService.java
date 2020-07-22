@@ -34,7 +34,7 @@ public class CurrencyAPIService {
     try {
       return Optional.ofNullable(rest.getForObject(latestFromTo, LatestBaseResponse.class));
     } catch (Exception x) {
-      log.warn("Something went wrong while processing latest with base " + x);
+      log.warn("Something went wrong while processing latest with base: " + x);
       return Optional.empty();
     }
   }
